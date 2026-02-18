@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building Automation Industry Overview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  :root {
+    --bg-primary: #0a0f14;
+    --bg-secondary: #0f1519;
+    --bg-tertiary: #141c22;
+    --bg-hover: #1a242d;
+    --border: #1e2a35;
+    --border-active: #00d4aa;
+    --accent: #00d4aa;
+    --accent-dim: rgba(0, 212, 170, 0.15);
+    --text-primary: #e0e6ed;
+    --text-secondary: #8899a6;
+    --text-muted: #556677;
+    --sidebar-w: 260px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    width: var(--sidebar-w);
+    min-width: var(--sidebar-w);
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar-header {
+    padding: 24px 20px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sidebar-header h1 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  .sidebar-header .subtitle {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.5px;
+  }
+
+  .search-box {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .search-box input {
+    width: 100%;
+    padding: 8px 12px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-primary);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-box input:focus {
+    border-color: var(--accent);
+  }
+
+  .search-box input::placeholder {
+    color: var(--text-muted);
+  }
+
+  .nav-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 0;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    border-left: 3px solid transparent;
+    transition: all 0.15s ease;
+    user-select: none;
+  }
+
+  .nav-item:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+  }
+
+  .nav-item.active {
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-left-color: var(--accent);
+    font-weight: 500;
+  }
+
+  .nav-item .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    margin-right: 12px;
+    flex-shrink: 0;
+    transition: background 0.15s;
+  }
+
+  .nav-item.active .dot {
+    background: var(--accent);
+    box-shadow: 0 0 6px rgba(0, 212, 170, 0.5);
+  }
+
+  .sidebar-footer {
+    padding: 16px 20px;
+    border-top: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+
+  /* MAIN CONTENT */
+  .main {
+    flex: 1;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+  }
+
+  .content-wrapper {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 48px 120px;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* MARKDOWN STYLES */
+  .content-wrapper h1 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--accent);
+  }
+
+  .content-wrapper h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 40px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .content-wrapper h3 {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 28px 0 12px;
+  }
+
+  .content-wrapper h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 24px 0 10px;
+  }
+
+  .content-wrapper p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+  }
+
+  .content-wrapper ul, .content-wrapper ol {
+    margin: 0 0 16px 24px;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  .content-wrapper li {
+    margin-bottom: 6px;
+    color: var(--text-primary);
+  }
+
+  .content-wrapper li::marker {
+    color: var(--accent);
+  }
+
+  .content-wrapper strong {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .content-wrapper em {
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+
+  .content-wrapper a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .content-wrapper a:hover {
+    border-bottom-color: var(--accent);
+  }
+
+  .content-wrapper blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: var(--accent-dim);
+    border-radius: 0 4px 4px 0;
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+
+  .content-wrapper code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    background: var(--bg-tertiary);
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--accent);
+  }
+
+  .content-wrapper pre {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+
+  .content-wrapper pre code {
+    background: none;
+    padding: 0;
+    font-size: 13px;
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  .content-wrapper hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 32px 0;
+  }
+
+  /* TABLES */
+  .content-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 13px;
+  }
+
+  .content-wrapper thead th {
+    background: var(--bg-tertiary);
+    color: var(--accent);
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+
+  .content-wrapper td {
+    padding: 9px 14px;
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    vertical-align: top;
+  }
+
+  .content-wrapper tbody tr:hover {
+    background: var(--bg-hover);
+  }
+
+  /* MOBILE */
+  .hamburger {
+    display: none;
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 200;
+    width: 40px;
+    height: 40px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--accent);
+    margin: 3px auto;
+    transition: 0.3s;
+  }
+
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 90;
+  }
+
+  @media (max-width: 768px) {
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      transform: translateX(-100%);
+    }
+    .sidebar.open {
+      transform: translateX(0);
+    }
+    .overlay.open {
+      display: block;
+    }
+    .hamburger {
+      display: flex;
+    }
+    .content-wrapper {
+      padding: 64px 20px 80px;
+    }
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg-primary); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<div class="hamburger" onclick="toggleSidebar()">
+  <span></span><span></span><span></span>
+</div>
+<div class="overlay" onclick="toggleSidebar()"></div>
+
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h1>Building<br>Automation</h1>
+    <div class="subtitle">Industry Overview / Feb 2026</div>
+  </div>
+  <div class="search-box">
+    <input type="text" id="search" placeholder="Filter documents..." oninput="filterNav(this.value)">
+  </div>
+  <nav class="nav-list" id="navList"></nav>
+  <div class="sidebar-footer">9 DOCUMENTS &middot; DATA FEB 2026</div>
+</aside>
+
+<main class="main">
+  <div class="content-wrapper" id="content"></div>
+</main>
+
+<script>
+const DOCS = [{"key": "readme", "label": "Overview", "content": "# Building Automation Industry Overview\n\n## Executive Summary\n\nThe global building automation system (BAS) market is valued at approximately **$101-117 billion (2025)** and is projected to reach **$163-221 billion by 2030**, growing at a **10.5-13.9% CAGR** depending on the source and market definition. This growth is driven by IoT/AI integration, energy efficiency mandates, smart city initiatives, and rising demand for occupant comfort and security.\n\nHowever, the industry faces a critical workforce bottleneck: **480,000+ unfilled HVAC jobs**, an aging technician workforce averaging **55 years old**, and a retirement-to-replacement ratio of **5:2**. This labor gap is simultaneously constraining growth and accelerating demand for smarter automation that can do more with fewer people.\n\n## Key Takeaways\n\n### Market Growth\n- ~$100B+ market today, roughly doubling by 2030\n- Building Energy Management Software is the fastest-growing segment (17.2% CAGR)\n- Industrial applications growing fastest (14.7% CAGR), commercial is largest\n- North America holds 34.2% share; Asia-Pacific growing fastest\n- Wireless/IoT technologies overtaking traditional wired protocols\n\n### Labor Reality\n- 42,500 annual HVAC job openings, many unfilled; 805+ BAS-specific jobs on Indeed alone\n- BAS career ladder: Installer ($30-60K) → Technician ($60-110K) → Programmer ($60-120K) → Integrator ($80-150K)\n- HVAC employment growing 8% through 2034 — \"much faster than average\"\n- 41% of construction workforce retiring by 2031; average tech age ~55\n- Skilled trades workers are out-earning college graduates in many markets\n- Only a handful of dedicated BAS training programs exist nationally — most techs learn on the job\n- Companies investing in training see 24% higher profit margins\n\n### The Feedback Loop\nMore automation demand → more need for skilled technicians → not enough technicians → more demand for AI/remote monitoring → more automation demand. The labor shortage is the industry's biggest constraint AND its biggest growth catalyst.\n\n## Project Structure\n\n```\nbuilding-automation-overview/\n├── README.md                    ← You are here\n├── data/\n│   ├── market-size.md           ← Market projections from 5 research firms\n│   ├── labor-workforce.md       ← Workforce shortage data & salary info\n│   ├── key-players.md           ← Major companies in the space\n│   ├── bas-technician-field.md  ← Deep dive: career ladder, salaries, certs, training, labor gap\n│   ├── nyc-vs-charlotte-pay.md  ← Regional pay comparison with COL-adjusted analysis\n│   ├── employers-ny-nc.md      ← Named employers by category in NY and NC\n│   ├── ny-contacts.md          ← NY contact directory: addresses, phones, emails, leadership\n│   └── nc-contacts.md          ← NC contact directory: addresses, phones, emails, leadership\n└── sources/\n    └── source-list.md           ← 35+ source URLs with annotations\n```\n\n## Data Collected: Feb 2026\n"}, {"key": "market-size", "label": "Market Size", "content": "# Building Automation Market Size & Growth Data\n\n## Compiled Market Projections (Multiple Sources)\n\n| Source | 2024/2025 Value | 2030 Projected | CAGR | Forecast Period |\n|---|---|---|---|---|\n| MarketsandMarkets | $101.3B (2025) | $191.13B | 13.4% | 2025-2030 |\n| Mordor Intelligence | $202.29B (2025) | $347.05B | 11.40% | 2025-2030 |\n| PS Market Research | $101.3B (2024) | $220.7B | 13.9% | 2025-2030 |\n| The Research Insights | — | $163.27B | 10.53% | 2025-2030 |\n| Research and Markets | $117.37B (2025) | $205.55B | 11.78% | 2025-2030 |\n\n> **Note:** Mordor Intelligence's significantly higher figures likely reflect a broader market definition (including more adjacent systems/services). The consensus range from most reports is **$101-117B (2025) growing to $163-221B (2030) at 10.5-13.9% CAGR**.\n\n## Key Segments\n\n### By Offering\n- Facility Management Systems\n- Security & Access Control\n- Fire Protection Systems\n- **Building Energy Management Software** (fastest growing segment — 17.2% CAGR)\n- BAS Services\n\n### By System Type\n- Building Management Systems (BMS)\n- HVAC Control Systems\n- Lighting Control Systems\n- Remote Monitoring Systems\n- Security & Access Control Systems\n\n### By Application\n- Residential\n- **Commercial** (largest share in 2024 — hospitals, hotels, offices, schools, malls)\n- **Industrial** (highest CAGR at 14.7% — factories, warehouses)\n\n### By Communication Technology\n- **Wired** (BACnet, LonWorks, Modbus) — largest share in 2024\n- **Wireless** (Bluetooth, Wi-Fi, Zigbee) — fastest growth projected\n\n### By Building Type\n- New constructions\n- Retrofit buildings\n\n## Regional Breakdown\n\n| Region | Details |\n|---|---|\n| **North America** | 34.2% market share (2024); driven by infrastructure upgrades and smart city initiatives |\n| **Europe** | $25.35B (2025) → $41.21B (2030), 10.2% CAGR; stringent energy efficiency regulations |\n| **Asia Pacific** | Highest CAGR during forecast period; rapid urbanization and new construction |\n\n## Growth Drivers\n1. IoT, AI, and cloud-based analytics integration\n2. Government smart city investments and green building initiatives\n3. Energy efficiency regulations and sustainability mandates\n4. Growing need to enhance occupant comfort, productivity, and security\n5. Rising demand for data-driven decision making\n6. Environmental sustainability mandates\n\n## Key Challenges\n1. System customization difficulties\n2. **Shortage of skilled professionals**\n3. Lack of standardized communication protocols\n4. Cybersecurity and data privacy concerns\n"}, {"key": "labor-workforce", "label": "Labor & Workforce", "content": "# Building Automation Labor & Workforce Data\n\n## The Shortage at a Glance\n\n- **550,000+** unfilled construction positions (2026)\n- **480,000+** unfilled HVAC jobs specifically\n- HVAC technician shortage expected to reach **225,000** by 2025\n- **42,500** average annual HVAC job openings, many remaining unfilled\n\n## Workforce Demographics & Pipeline\n\n- Average technician age: **~55 years old**\n- Retirement-to-replacement ratio: **5:2** (for every 5 who retire, only 2 new entrants)\n- HVAC-R mechanics/installers employment projected to grow **8%** through 2034 (~40,100 openings/year) — \"much faster than average\"\n- Electrician employment projected to grow **9%** through 2034 (~81,000 openings/year)\n- Total U.S. employment projected to increase by **5.2 million jobs** by 2034\n\n## BAS Technician Specialization\n\n- BAS technicians are a specialized subset of HVAC/controls professionals\n- Modern BAS work requires **data analysis** skills, not just mechanical intuition\n- Adjusting airflows/energy loads involves interpreting **networked control logic**\n- Employers increasingly seek technicians with skills in:\n  - Energy auditing\n  - Building automation systems\n  - Indoor air quality\n  - Smart building technologies\n\n## Compensation\n\n| Role | Salary Range |\n|---|---|\n| General HVAC/Electrician | $55,000 - $70,000/yr |\n| Advanced controls/BAS trained | $70,000 - $90,000/yr |\n| Smart building / BAS specialists | **$90,000+/yr** |\n\n- Skilled trades workers are **out-earning college graduates** in many markets (2026)\n- Commercial/BAS specialization commands significant salary premiums\n\n## Training & Retention Data\n\n- Companies prioritizing technician training see **24% higher profit margins**\n- **30-50% improvement** in retention rates\n- Service call times shorten by **20%**\n- Customer satisfaction increases by **15%**\n- Modern training: modular 6-week intensive courses covering health, safety, air quality, and controls\n\n## The Implication for Market Growth\n\nThe labor shortage is both a **constraint** and a **driver** for the BAS market:\n- **Constraint:** Lack of qualified technicians slows deployment and maintenance\n- **Driver:** Labor scarcity accelerates adoption of automation, remote monitoring, and AI-driven fault detection to do more with fewer people\n"}, {"key": "key-players", "label": "Key Players", "content": "# Key Industry Players — By Company Type\n\n## Who Hires BAS Technicians?\n\nBAS technicians work across several distinct employer categories. Understanding these categories matters because pay, career path, and day-to-day work differ significantly between them.\n\n---\n\n## 1. Building Product Manufacturers (OEMs)\n\nThese companies **design, manufacture, and sell** BAS hardware and software — controllers, sensors, actuators, and platforms. They hire BAS techs for factory support, field engineering, commissioning, and training roles.\n\n| Company | Notes | HQ |\n|---|---|---|\n| **Johnson Controls** | Market leader (\"Star player\"); OpenBlue platform | Cork, Ireland / Milwaukee, WI |\n| **Schneider Electric** | EcoStruxure BAS platform; global leader | Rueil-Malmaison, France |\n| **Siemens AG** | Desigo CC platform; strong in Europe | Munich, Germany |\n| **Honeywell International** | Niagara/Tridium (owned by Honeywell); major across all segments | Charlotte, NC |\n| **Carrier** | i-Vu / Automated Logic (subsidiary); HVAC-focused | Palm Beach Gardens, FL |\n| **Trane Technologies** | Tracer platform; commercial HVAC leader | Swords, Ireland / Davidson, NC |\n| **Robert Bosch GmbH** | Acquired Climatec (2015); \"Emerging Leader\" | Gerlingen, Germany |\n| **ABB** | ABB Ability platform; strong in industrial | Zurich, Switzerland |\n| **Emerson Electric** | Copeland (formerly Emerson Climate); commercial controls | St. Louis, MO |\n| **Delta Electronics** | Growing BAS/energy management presence | Taipei, Taiwan |\n| **Legrand** | Lighting controls and building systems | Limoges, France |\n| **Hubbell** | Electrical and lighting controls | Shelton, CT |\n\n---\n\n## 2. Systems Integrators & Controls Contractors\n\nThese companies **install, program, commission, and service** BAS in buildings. They are the **primary employers of BAS technicians** — this is where most field techs work. They may be independent (multi-vendor) or aligned with a specific OEM.\n\n| Company | Type | Notes | HQ / Coverage |\n|---|---|---|---|\n| **Albireo Energy** | Independent integrator | Certified in all major OEM platforms; 100+ certified BAS pros; acquires regional firms | National (US) |\n| **Climatec** (Bosch) | OEM-aligned integrator | 40+ years; becoming \"Bosch Building Technologies\" Jan 2026; turnkey energy & BAS | Phoenix, AZ / multi-state |\n| **Sunbelt Controls** | Independent integrator | 30+ years; 12 offices in 6 states; works with any brand; PMs avg 25yr experience | Western US |\n| **EMCOR Group** (NYSE: EME) | Mechanical/electrical contractor | Fortune 500; 100+ subsidiaries; one of largest independent BAS providers nationally | Norwalk, CT / 180 locations |\n| **Comfort Systems USA** | Mechanical contractor | Major HVAC and controls contractor; national footprint | Houston, TX |\n| **Automated Logic** (Carrier) | OEM integrator | Carrier subsidiary; WebCTRL platform; nationwide dealer network | Kennesaw, GA |\n| **Mid-Atlantic Controls** | Regional integrator | Independent; open-protocol focus | Mid-Atlantic US |\n| **Building Automation Solutions** | Regional integrator | NYC metro market | New York, NY |\n\n---\n\n## 3. Facilities & Maintenance / Property Management\n\nThese companies **own, operate, or manage** buildings and hire BAS technicians in-house to maintain and optimize their building systems. Techs in this category tend to be more focused on day-to-day operations, troubleshooting, and energy optimization than on new installations.\n\n| Company Type | Examples | Notes |\n|---|---|---|\n| **Commercial REIT / Property Managers** | CBRE, JLL, Cushman & Wakefield, Brookfield | Manage large portfolios of Class A office, retail, mixed-use; need BAS techs for tenant comfort, energy targets, compliance |\n| **Healthcare Systems** | Hospital networks, medical centers | Mission-critical BAS for air quality, pressure, temperature in ORs, labs, pharmacies |\n| **Higher Education** | Universities, community colleges | Campus-wide BAS across dozens of buildings; often large in-house controls teams |\n| **Government / Military** | GSA, DoD, municipal facilities | Federal and state buildings; often driven by energy mandates |\n| **Data Centers** | Equinix, Digital Realty, AWS, Microsoft | Precision cooling controls; rapidly growing segment in Charlotte/NC corridor |\n| **Hospitality** | Major hotel chains | Guest comfort + energy management across large properties |\n| **Corporate Campus** | Large tech companies, financial institutions | In-house facilities teams managing BAS across HQ/campus buildings |\n\n---\n\n## How the Categories Connect\n\n```\n[OEM Manufacturers] ──── design & build products ────→ [BAS Hardware/Software]\n        │                                                       │\n        │ factory support,                                      │ sold to\n        │ field engineering                                     │\n        ▼                                                       ▼\n[Systems Integrators    ◄── install, program, ──── [Building Owners /\n & Controls Contractors]    commission, service      Property Managers /\n                                                     Facilities Teams]\n        │                                                       │\n        │                                                       │\n        └──── BAS Technicians work here ────────────────────────┘\n              (largest employer category)         (growing in-house teams)\n```\n\n### Where the Jobs Are (by volume)\n\n1. **Systems Integrators & Contractors** — largest employer of BAS techs; project-based work, new installs + retrofits + service\n2. **OEM Manufacturers** — factory support, field engineering, training, technical sales\n3. **Facilities / Property Management** — in-house operations, optimization, maintenance; growing as buildings get smarter\n4. **End Users (direct hire)** — hospitals, universities, government, data centers hiring dedicated controls staff\n\n### Pay Differences by Employer Type\n\n| Employer Type | Typical BAS Tech Range | Notes |\n|---|---|---|\n| OEM Manufacturer | $65K - $110K | Best benefits, structured career paths, training provided |\n| Systems Integrator (large) | $55K - $100K | Project variety, advancement to programmer/PM; EMCOR, Albireo |\n| Systems Integrator (small/regional) | $45K - $85K | More autonomy, broader skill development |\n| Property Management (in-house) | $60K - $95K | Stable hours, single-site or portfolio focus; CBRE, JLL |\n| Healthcare / Government | $55K - $90K | Strong benefits, job security, union roles common |\n| Data Centers | $70K - $120K | Premium pay for precision environment work |\n"}, {"key": "bas-technician", "label": "BAS Technician Field", "content": "# BAS Technician Field — Detailed Profile\n\n## What a BAS Technician Does\n\nBuilding Automation Systems Technicians install, repair, and maintain computer-based control systems that monitor and manage a building's mechanical and electrical equipment — HVAC, lighting, fire/life safety, security, and energy management. They work across commercial and industrial buildings: offices, hospitals, hotels, warehouses, and factories.\n\nDay-to-day work includes:\n- Programming and troubleshooting DDC (Direct Digital Control) systems\n- System calibration, controller uploads/downloads, front-end setup\n- Software updates and integration of networked building systems\n- Reading blueprints and schematics\n- Service support and diagnostics using data analysis (not just mechanical intuition)\n- Interpreting networked control logic for airflow and energy load adjustments\n\n---\n\n## Career Ladder & Salary Ranges\n\n| Level | Role | Salary Range | Experience |\n|---|---|---|---|\n| 1 | **Installer** | $30,000 - $60,000 | Entry level |\n| 2 | **BAS Trainee** | $45,000 - $55,000 | 1-3 years related |\n| 3 | **BAS Technician** | $60,000 - $110,000 | 3-5 years |\n| 4 | **Programmer** | $60,000 - $120,000 | 5+ years |\n| 5 | **Designer** | $50,000 - $90,000 | 6+ months field + degree |\n| 6 | **Integrator** | $80,000 - $150,000 | Senior specialist |\n| 7 | **Project Manager** | $60,000 - $90,000 | Management track |\n| 8 | **Sales / Solutions** | $40,000 - $200,000 | Commission-inclusive |\n\n### Salary Data Across Sources\n| Source | Average / Median | Range |\n|---|---|---|\n| PayScale (2025) | $83,619 avg | $62K - $116K |\n| Glassdoor (2025) | $75K-$100K | $78K - $130K (25th-75th) |\n| Salary.com (2025) | $58,465 avg | — |\n| ZipRecruiter (2025) | $45,556 avg | $42K - $125K |\n| HVAC Career Map | — | $60K - $110K |\n\n> **Note:** Wide variation reflects the range from entry-level to senior/specialist roles, and geographic differences. BAS specialists in major metros and commercial/industrial settings consistently command the highest salaries.\n\n### Senior / Advanced Roles (Career Progression from BAS Technician)\n- Senior Operations Systems Analyst\n- Commissioning Specialist\n- Energy Analyst\n- HVAC Instructor\n- Equipment Manufacturer Representative\n- Test & Balance Technician\n- Controls Engineer\n- Most require bachelor's degrees or specialized certifications\n\n---\n\n## Current Job Market\n\n### Active Openings (as of late 2025 / early 2026)\n- **805+** BAS Controls Technician jobs on Indeed.com nationally\n- **64** positions in New York metro alone (Glassdoor, Nov 2025)\n- Active hiring across Indeed, Glassdoor, ZipRecruiter, LinkedIn\n- Roles span: Automation Technician, Controls Engineer, Senior Field Technician, BAS Programmer\n\n### Key Employers\n- Johnson Controls\n- Trane Technologies\n- Schneider Electric\n- Siemens\n- Honeywell\n- Albireo Energy\n- Climatec\n- Sunbelt Controls\n- EMCOR Group\n\n---\n\n## Education & Training Pipeline\n\n### Minimum Requirements\n- High school diploma or equivalent\n- 1-3 years related work experience (for trainee level)\n\n### Preferred Education\n- Certificate or 2-year degree in:\n  - Building Automation Systems Technology\n  - HVAC Technology\n  - Electronics / Electrical Technology\n  - Mechanical Systems\n  - Computer Technology\n- Trade school programs: 18-36 months typical\n\n### Notable Training Programs\n| Institution | Program |\n|---|---|\n| Community College of Baltimore County | BAS Technician Certificate |\n| Salt Lake Community College | Building Automation Systems |\n| Wake Tech (NC) | Building Automation Technology (NSF-funded) |\n| College of DuPage | BAS Certificate |\n| Smart Buildings Academy | BAS A to Z (online) |\n| HVACRedu.net | Online BAS & Controls Training |\n\n### Key Certifications\n| Certification | Provider | Details |\n|---|---|---|\n| **Niagara 4 TCP** | Tridium | 5-day technical certification; the industry-standard BAS platform. 4,000+ certified since 2007 |\n| **EPA 608** | EPA | Required for refrigerant handling |\n| **CxA** (Commissioning Authority) | AABC Commissioning Group | Based on ASHRAE Standard 202 and Guideline 0 |\n| **OSHA 10/30** | OSHA | Safety certification |\n| **TAB Certification** | AABC | Testing, Adjusting, and Balancing |\n\n### Core Technical Skills Required\n- **Electrical:** Ohm's Law, AC/DC, transformers, circuits, relays, safety systems\n- **HVAC:** System operation — air handlers, VAVs, chillers, boilers, sequencing logic\n- **Controls:** DDC programming, BACnet/LonWorks/Modbus protocols\n- **IT/Networking:** Basic networking, computer literacy, data analysis\n- **Mechanical:** Spatial reasoning, schematic visualization, hands-on aptitude\n\n---\n\n## The Labor Gap — Specific to BAS\n\n### The Problem\n- BAS technicians are a **specialized subset** of the broader HVAC workforce\n- The HVAC field already has **480,000+ unfilled jobs** and **42,500 annual openings**\n- BAS roles require **additional skills** beyond traditional HVAC: programming, networking, data analysis\n- Average technician age is **~55 years old** with a **5:2 retirement-to-replacement ratio**\n- **41% of the construction workforce** set to retire by 2031\n\n### Why the Gap Is Widening\n1. **Expanding scope:** Modern BAS integrates HVAC + lighting + security + fire + energy management — more systems, more complexity\n2. **Technology shift:** Moving from mechanical to software-defined buildings requires IT skills that traditional HVAC training doesn't cover\n3. **Market growth:** 10-14% annual market growth means rapidly expanding demand for technicians\n4. **Training pipeline:** Few dedicated BAS programs exist — most technicians come from HVAC and learn controls on the job\n5. **Competing industries:** IT, cybersecurity, and software compete for the same technically-inclined workers\n\n### The Opportunity\n- BAS specialization commands **30-60% salary premiums** over general HVAC\n- Skilled trades are **out-earning college graduates** in many markets\n- **Virtual guarantees of employment** for qualified workers\n- Companies investing in technician training see **24% higher profit margins** and **30-50% better retention**\n- Growing demand for remote monitoring and AI-driven diagnostics creates new role categories\n\n---\n\n## BLS Baseline (HVAC-R Mechanics & Installers — closest BLS category)\n\n| Metric | Data |\n|---|---|\n| Employment Growth | 8% (2024-2034) — \"much faster than average\" |\n| Annual Openings | ~40,100 projected per year |\n| Median Pay (2024) | ~$57,000/year (general HVAC) |\n| Education | Postsecondary nondegree award typical |\n| Work Experience | None required at entry |\n| On-the-Job Training | Apprenticeship typical |\n\n> **Note:** BLS does not track \"BAS Technician\" as a separate category. BAS roles fall under HVAC-R mechanics (SOC 49-9021) but represent a higher-skill, higher-pay subset of this broader occupation.\n"}, {"key": "nyc-charlotte", "label": "NYC vs Charlotte Pay", "content": "# BAS Technician Pay: NYC vs Charlotte, NC\n\n## Building Automation Technician Salary Comparison\n\n| Metric | New York City | Charlotte, NC | Difference |\n|---|---|---|---|\n| **Average (Salary.com)** | $67,755 | $56,507 | NYC +20% |\n| **Average (Glassdoor)** | $77,465 | ~$55,560 (NC avg) | NYC +39% |\n| **Average (ZipRecruiter)** | $77,307 | — | — |\n| **25th Percentile** | $62,027 | ~$50,000 | NYC +24% |\n| **75th Percentile** | $97,484 | ~$72,000 | NYC +35% |\n| **90th Percentile** | $119,406 | — | — |\n| **Hourly Rate** | $33-37/hr | ~$27-30/hr | NYC +20-25% |\n\n## General HVAC Technician Salary (broader category)\n\n| Metric | New York City | Charlotte, NC | Difference |\n|---|---|---|---|\n| **Average** | $75,523 | $71,695 | NYC +5% |\n| **25th Percentile** | $62,911 | $60,404 | NYC +4% |\n| **75th Percentile** | $91,353 | $85,782 | NYC +6% |\n\n> **Note:** The gap between NYC and Charlotte is larger for BAS-specific roles (~20-39%) than for general HVAC (~5%). This likely reflects higher demand for building automation in NYC's dense commercial real estate market.\n\n## Cost of Living Adjustment\n\n| Category | NYC vs Charlotte |\n|---|---|\n| **Overall Cost of Living** | NYC is **~41% more expensive** |\n| **Housing** | NYC is **~130-170% more expensive** (largest gap) |\n| **Groceries** | NYC is ~15-25% more expensive |\n| **Transportation** | NYC is ~20-30% more expensive |\n| **Utilities** | NYC is ~15-20% more expensive |\n| **Healthcare** | NYC is ~10-15% more expensive |\n\nSources: Salary.com, Numbeo, BestPlaces.net comparisons\n\n## Real Purchasing Power Analysis\n\n**The key question: What does the pay difference actually buy you?**\n\n### Scenario: Mid-level BAS Technician\n\n| | NYC | Charlotte |\n|---|---|---|\n| Gross Salary | $77,000 | $57,000 |\n| NYC premium | +$20,000 (35%) | — |\n| Cost of living penalty | ~41% higher costs | Baseline |\n| **Equivalent purchasing power** | ~$55,000 in Charlotte terms | $57,000 |\n\n**Charlotte comes out ahead on purchasing power.** A mid-level BAS tech earning $57K in Charlotte has roughly the same — or slightly better — standard of living as one earning $77K in NYC. The housing cost difference alone ($1,500-2,000+/mo in NYC vs $1,000-1,400 in Charlotte) eats the entire salary premium.\n\n### Scenario: Senior BAS Tech / Integrator\n\n| | NYC | Charlotte |\n|---|---|---|\n| Gross Salary | $100,000 - $120,000 | $75,000 - $95,000 |\n| COL-adjusted equivalent | ~$71,000 - $85,000 | $75,000 - $95,000 |\n\nAt the senior level, Charlotte's advantage becomes even more pronounced.\n\n## Market Dynamics — Why This Matters\n\n### NYC\n- **Massive commercial building stock** — millions of sq ft of Class A office, hospitals, universities\n- Strong **union presence** (IUOE Local 94, etc.) can push compensation higher\n- High density of **retrofit projects** in aging building stock\n- More BAS jobs per capita but also higher competition for experienced techs\n- NYC Local Law 97 (carbon emission caps) driving huge wave of BAS upgrades\n\n### Charlotte\n- **Rapidly growing market** — one of the fastest-growing US metros\n- Major corporate relocations driving new commercial construction\n- Lower cost of operations attracts BAS service companies\n- **Thinner talent pool** — fewer qualified BAS techs, potentially more leverage for experienced workers\n- Wake Tech (nearby Raleigh) is one of the few dedicated BAS training programs in the country\n- Growing data center corridor in the Carolinas creating adjacent demand\n\n### The Takeaway\n\n- **For employers:** Charlotte offers a better value proposition for building a BAS workforce — lower labor costs, lower overhead, growing market\n- **For technicians:** Charlotte offers better purchasing power at most experience levels; NYC offers higher absolute pay and more job density, particularly for union roles and high-end commercial projects\n- **For training/recruitment:** The Charlotte/Carolinas region has both growing demand AND a nearby training pipeline (Wake Tech), making it a strategic location for workforce development\n"}, {"key": "employers", "label": "Employers: NY & NC", "content": "# BAS Employers by Category — New York & North Carolina\n\n---\n\n## NEW YORK\n\n### 1. Building Product Manufacturers (OEMs)\n\nCompanies with offices/operations in NY that design and sell BAS products:\n\n| Company | NY Presence | Notes |\n|---|---|---|\n| **Johnson Controls** | NYC metro offices | OpenBlue platform; major presence in NYC commercial market |\n| **Siemens** | NYC metro offices | Desigo CC platform; strong in institutional/healthcare |\n| **Honeywell** | NYC metro offices | Owns Tridium/Niagara; large NY install base |\n| **Carrier / Automated Logic** | NYC metro offices | WebCTRL platform; dealer network across NY |\n| **Trane Technologies** | NYC commercial sales office | Tracer platform; significant NYC commercial presence |\n| **Schneider Electric** | NYC metro offices | EcoStruxure platform |\n\n### 2. Systems Integrators & Controls Contractors\n\nCompanies that **install, program, and service** BAS — the primary employers of BAS techs in NY:\n\n**NYC Metro:**\n\n| Company | Location | Notes |\n|---|---|---|\n| **T.M. Bier & Associates (TMBA)** | New York City | NYC's leading BMS provider since 1977; design, install, service |\n| **Control Solutions Group** | Manhattan / Bronx | HVAC control systems; Automated Logic dealer; 24/7 service across all 5 boroughs |\n| **Control Technologies Inc. (CTI)** | New York | Building automation since 1986; statewide |\n| **React Technical** | New York City | BAS design and retrofit for hundreds of NYC businesses |\n| **Building Automation Solutions (BAS NY)** | New York City | Integrated BMS for buildings and portfolios |\n| **EJS NYC** | Bronx, Brooklyn, Manhattan, Queens, Staten Island | Full borough coverage |\n| **Power-Flo Technologies** | New York | BAS and controls; actively hiring techs |\n\n**Greater NY / Tri-State:**\n\n| Company | Location | Notes |\n|---|---|---|\n| **Stark Tech** | Buffalo, NY (HQ); offices in Rochester, Binghamton, Long Island, East Syracuse, Corning, Ogdensburg, Albany, New Paltz, NJ, FL | Est. 1989; aggressive acquisition growth (Day Automation); building automation, energy, security, power; one of the largest in upstate NY |\n| **EMCOR Services NY/NJ** | NY/NJ metro | Division of Fortune 500 EMCOR Group (NYSE: EME); one of largest independent BAS providers nationally |\n| **Scientific Building Automation** | NJ/NY/CT/PA | 50+ years of industry expertise; multi-state coverage |\n| **IKM Building Solutions** | NY/NJ region | Operating since 1969; BAS and controls installation/integration |\n| **Building System Integrators (BSI)** | NY metro | 65+ years in facility automation and commercial HVAC |\n| **Automated Building Solutions** | New Jersey (tri-state HQ) | BAS design, engineering, integration, installation |\n| **Unitemp MDI** | New Jersey | Pioneer in BAS/BCS technology; industrial and commercial |\n| **CMS HVAC** | New Jersey | Intelligent BAS integration; smart mechanical + BAS solutions |\n| **Mid-Atlantic Controls** | Mid-Atlantic / NY metro | Independent; open-protocol, non-proprietary systems focus |\n\n### 3. Facilities & Property Management (In-House BAS Roles)\n\n**Commercial Real Estate / Property Managers:**\n\n| Company | Portfolio Size | Notes |\n|---|---|---|\n| **SL Green Realty** | **32.5M sq ft** (59 buildings) | **Largest office landlord in Manhattan**; NYSE: SLG; HQ'd in NYC |\n| **Brookfield Properties** | **26.6M sq ft** in Manhattan | Brookfield Place, Manhattan West; ~150M sq ft globally |\n| **Vornado Realty Trust** | **20.6M sq ft** (33 buildings) | Major NYC office/retail; Penn District redevelopment |\n| **RXR Realty** | **26.5M sq ft** managed | Helmsley Building, 75 Rockefeller Plaza, 5 Times Square, 450 Lexington |\n| **CBRE** | Major NYC presence | World's largest commercial RE firm; hires building engineers with BAS skills |\n| **JLL (Jones Lang LaSalle)** | Major NYC presence | Big 4 CRE; facilities management across major NYC portfolios |\n| **Cushman & Wakefield** | Major NYC presence | Big 4 CRE; building engineer and facilities tech roles |\n| **Silverstein Properties** | WTC campus | 7 World Trade Center, 3/4 WTC; major downtown portfolio |\n| **Related Companies** | Hudson Yards | Hudson Yards developer; massive new BAS-intensive campus |\n| **Tishman Speyer** | Rockefeller Center, others | Major Class A office portfolio |\n| **Boston Properties (BXP)** | Midtown portfolio | Major NYC office REIT |\n\n**Union Presence (Unique to NYC):**\n\n| Union | Coverage | Impact |\n|---|---|---|\n| **IUOE Local 94** | 5,000+ members across NYC | Represents building engineers responsible for HVAC, BAS, and all mechanical systems in public, private, residential, and commercial buildings. Union roles typically include BAS operation/maintenance. Located at 331 W 44th St, NYC. Union contracts generally push compensation higher than non-union markets. |\n| **Local 32BJ SEIU** | Building service workers | Largest property service workers union in US; some overlap with facilities/engineering roles |\n\n> **NYC Union Impact:** Union presence significantly affects BAS technician compensation and career structure. IUOE Local 94 building engineers operating BAS in Class A office buildings can earn substantially above non-union market rates, with strong benefits packages including pension, healthcare, and training funds.\n\n**Healthcare Systems:**\n\n| Employer | Scale | Notes |\n|---|---|---|\n| **NYC Health + Hospitals** | 11 acute care hospitals, 70+ patient care locations | Largest public healthcare system in US; 419+ engineering jobs posted; massive BAS footprint |\n| **NYU Langone Health** | 6 inpatient locations | Major academic medical center; building engineer roles across campuses |\n| **NewYork-Presbyterian** | 10 hospital campuses | Columbia and Weill Cornell affiliated; one of nation's largest hospital systems |\n| **Mount Sinai Health System** | 8 hospitals | Multi-hospital network across Manhattan and boroughs |\n| **Northwell Health** | **21 hospitals**, 900+ outpatient facilities | Largest healthcare provider in NY state; enormous facilities operation |\n| **Montefiore Medical Center** | 4 hospitals (Bronx) | Major Bronx healthcare system |\n\n**Higher Education:**\n\n| Employer | Campus Scale | Notes |\n|---|---|---|\n| **New York University (NYU)** | 175+ buildings across Manhattan & Brooklyn | Actively hires BAS techs; one of largest private university campuses in US |\n| **Columbia University** | Morningside + medical campus + Manhattanville expansion | Major new construction at Manhattanville driving BAS demand |\n| **CUNY System** | **25 campuses** across NYC | Massive footprint; centralized facilities operations |\n| **SUNY System** | Multiple campuses statewide | State university system |\n| **Cornell Tech** | Roosevelt Island campus | Newer campus with modern BAS infrastructure |\n| **The New School** | Greenwich Village campus | Multiple buildings across downtown |\n\n**Government / Public:**\n\n| Employer | Scale | Notes |\n|---|---|---|\n| **NYC DCAS** | 55+ city-owned buildings, 330M+ sq ft citywide portfolio | Manages city buildings; **LL97 compliance driving massive BAS upgrades** |\n| **Port Authority of NY/NJ** | JFK, LGA, EWR airports; GWB; WTC campus; bus terminals | Critical infrastructure with complex BAS needs |\n| **MTA** | 472 stations, offices, maintenance facilities | Transit infrastructure; HVAC/BAS in stations and facilities |\n| **NYC School Construction Authority** | 1,800+ school buildings | Massive building stock requiring controls upgrades |\n| **NYS DASNY** | Statewide authority | Dormitory Authority; manages state facility construction/renovation |\n\n---\n\n### NEW YORK — KEY MARKET DRIVER: Local Law 97\n\nNYC Local Law 97 (Climate Mobilization Act, 2019) is the **single biggest demand driver** for BAS work in New York right now:\n\n| Metric | Data |\n|---|---|\n| **Buildings affected** | Most buildings over 25,000 sq ft (~50,000 buildings) |\n| **Compliance deadline** | Emissions limits began 2024; stricter limits in 2030 |\n| **Estimated job creation** | Up to **141,000 local jobs** by 2030 (Urban Green Council) |\n| **Retrofit market size** | Potential **$20 billion** in economic activity (13x current retrofit market) |\n| **Retrofit projects** | ~25,000 projects in ~5,500 buildings for prewar multifamily alone by 2030 |\n| **Penalty for non-compliance** | $268 per metric ton of CO2 over the limit, annually |\n| **What it means for BAS** | Every affected building needs energy audits, BAS upgrades/optimization, metering, and ongoing monitoring to meet emission caps |\n\n> **Bottom line:** LL97 is creating an unprecedented wave of BAS retrofit work across tens of thousands of NYC buildings, driving demand for technicians who can install, program, and optimize building controls for carbon reduction. Companies specializing in LL97 compliance + BAS are already in high demand.\n\n---\n\n## NORTH CAROLINA (Charlotte / Raleigh-Durham Focus)\n\n### 1. Building Product Manufacturers (OEMs)\n\n| Company | NC Presence | Notes |\n|---|---|---|\n| **Honeywell** | **Global HQ in Charlotte** (855 S Mint St, Uptown; Legacy Union) | Massive local presence; major employer; Tridium/Niagara platform; engineering, corporate, and field roles |\n| **Trane Technologies** | **Corporate HQ in Davidson, NC** (Charlotte metro) + Charlotte commercial sales office | Tracer platform; hometown employer for corporate + field roles |\n| **Carrier** | Charlotte area operations | Hiring BAS and controls positions in Charlotte |\n| **Siemens** | NC operations | Building automation positions in Raleigh area |\n| **ABM Industries** | NC operations | Building automation and facility services positions in Raleigh |\n\n> **Notable:** Charlotte is uniquely positioned as the **headquarters city for two major BAS OEMs** (Honeywell and Trane Technologies), creating a concentration of corporate, engineering, and field roles not found in most US metros.\n\n### 2. Systems Integrators & Controls Contractors\n\n**Charlotte Metro:**\n\n| Company | Founded | Notes |\n|---|---|---|\n| **Charlotte Temperature Controls (CTC)** | 1988 | Family-owned (Catherine Aldridge & Chad Starnes); authorized Honeywell contractor; Niagara Tridium integrator; BACnet/Lon; serves NC & SC |\n| **Controls Service Group** | 2009 | Independent controls contractor; BAS install, commissioning, energy management |\n| **CMS Controls** | — | Multi-protocol BAS; lighting, energy management, system integration |\n| **Carolina Air Solutions** | 1989 | Commercial HVAC + BAS throughout the Carolinas; authorized Carrier Comfort Network dealer |\n| **MSS Solutions** | 1996 | Full-service mechanical contractor; **HQ at 11524 Wilmar Blvd, Charlotte**; 8 offices across the Carolinas; 7 service lines including BAS, fire alarm, security, energy management |\n| **Hoffman Building Technologies** | 1985 (HQ Appleton, WI) | Charlotte office; BMS, automated controls, critical airflow, energy management |\n| **ATF Services** | — | Hundreds of installations across the Carolinas; building automation, thermal imaging, lighting controls |\n\n**Raleigh-Durham / Triangle:**\n\n| Company | Founded | Notes |\n|---|---|---|\n| **Engineered Control Solutions (ECS)** | 1999 | Regional leader in Central & Eastern NC; DDC systems design, install, service |\n| **CCAC Building Solutions** | — | In-house software engineers; smart building design with dashboards, diagnostics, and notifications; serves throughout NC |\n\n**Statewide / Carolinas:**\n\n| Company | Coverage | Notes |\n|---|---|---|\n| **Mechanical Contractors LLC (MCI)** | North Carolina | Systems Integration Group; full building lifecycle controls |\n| **Environmental Controls & Mechanical (ECM)** | North Carolina | BAS systems experts |\n| **Facility Systems Services (FSS)** | North Carolina | BAS and controls; latest technologies |\n| **Platinum Building Automation** | Carolinas | BAS service specialist; maintains 2M+ sq ft of real estate; sustainability and energy efficiency focus |\n\n### 3. Facilities & Property Management (In-House BAS Roles)\n\n**Commercial Real Estate / Property Managers:**\n\n| Company | Charlotte Presence | Notes |\n|---|---|---|\n| **JLL** | **#1 CRE firm in Charlotte** — 1,068 local employees | Largest facilities management presence in the Charlotte market |\n| **CBRE** | 743 local employees, 40 brokers | Major Charlotte presence; facilities and building engineer roles |\n| **Cushman & Wakefield** | 276 local employees, 46 brokers | Big 4 CRE; property/facilities management |\n| **Highwoods Properties** | Raleigh, NC (HQ); **1.6M sq ft Class AA at Legacy Union, Charlotte** | Major Southeast office REIT; owns Bank of America Tower (841K sf), SIX50 (367K sf), 6Hundred (411K sf) |\n| **Lincoln Harris** | Charlotte (developer) | Legacy Union developer (with Goldman Sachs); major Charlotte mixed-use projects |\n| **Crescent Communities** | Charlotte (HQ) | Mixed-use development; growing portfolio including Elizabeth on Seventh |\n| **Cousins Properties** | Charlotte portfolio | Major Southeast office REIT; significant Charlotte presence |\n| **Childress Klein** | Charlotte | Major local commercial developer |\n\n**Healthcare Systems:**\n\n| Employer | Scale | Notes |\n|---|---|---|\n| **Atrium Health / Advocate Health** | 67 hospitals (post-merger) | Largest healthcare system in Charlotte; merged with Advocate Aurora to become one of nation's largest; massive facilities operation |\n| **Novant Health** | 15 hospitals | Major NC network; Charlotte and Winston-Salem hubs |\n| **Duke Health** | 3 hospitals + clinics | Durham; major academic medical center; large facilities team |\n| **UNC Health** | 14 hospitals | Chapel Hill HQ; statewide network |\n| **WakeMed** | 3 hospitals | Raleigh area; growing system |\n\n**Higher Education:**\n\n| Employer | Campus Scale | Notes |\n|---|---|---|\n| **UNC Charlotte** | Growing campus (1,000+ acres) | BAS across academic and research buildings; enrollment 30,000+ |\n| **NC State University** | 2,100+ acre campus, Raleigh | Large campus with extensive BAS across hundreds of buildings |\n| **Duke University** | 8,600+ acre campus, Durham | Major campus operations; medical center included |\n| **UNC Chapel Hill** | 729 acres, 300+ buildings | Large campus BAS footprint |\n| **Wake Tech Community College** | Multiple campuses, Raleigh area | Runs one of the few **dedicated BAS training programs** in the US (NSF-funded) |\n| **Charlotte-Mecklenburg Schools (CMS)** | 180+ schools | Large K-12 district; building systems across all facilities |\n\n**Government / Public:**\n\n| Employer | Notes |\n|---|---|\n| **City of Raleigh** | Actively posts BAS technician jobs on government job boards |\n| **Charlotte-Mecklenburg Government** | Municipal buildings and facilities |\n| **NC State Government** | State-owned buildings across the Triangle and Charlotte |\n| **Fort Liberty (formerly Bragg)** | Major military installation in NC; DoD facilities contracts |\n| **Camp Lejeune / MCAS Cherry Point** | Marine installations; federal facility contracts |\n\n**Data Centers (Booming Segment):**\n\n| Company | NC Presence | Investment / Scale |\n|---|---|---|\n| **Amazon Web Services (AWS)** | Richmond County | **$10B investment**; 20 buildings, 3.7M sq ft; near 2.24 GW power plant; broke ground Oct 2025 |\n| **Apple** | Maiden, NC (Catawba County) | 500,000+ sq ft; recent **$175M expansion** adding 237,600 sq ft |\n| **Google** | Lenoir, NC | **$1.2B+ investment** |\n| **Meta (Facebook)** | Forest City, NC | Multi-building campus |\n| **Microsoft** | Person County | **1,385-acre megasite** acquisition for $26.8M |\n| **WhiteFiber** | Madison, NC (Rockingham County) | NC-1 campus: 96 acres, 970,000 sq ft; scaling 24 MW → 200 MW; 60+ permanent ops jobs |\n| **Digital Realty** | Charlotte | **400 MW campus** announced April 2025; 156 acres rezoned |\n| **Energy Storage Solutions** | Tarboro + Fayetteville | **$19.2B** planned project; groundbreaking Q1 2026 |\n| **American Tower** | Cary, NC | Data Center Site Operations Technician roles |\n| **TierPoint** | Raleigh | Operations Technician positions |\n| **Fidelity** | Morrisville, NC | Data Center Operations team |\n\n> **NC Data Center Boom — The Numbers:**\n> - **40+ data centers** currently operating; dozens more announced or under construction\n> - Construction in Charlotte/Raleigh has hit **15x the previous high** (113.4 MW underway as of H1 2024)\n> - Current power demand: ~3 GW; projected to **double to ~6 GW** within the decade\n> - Single hyperscale data hall: 12-18 months from mobilization to commissioning\n> - Trades in demand: electricians, **HVAC/BAS technicians**, pipefitters, ironworkers, low-voltage specialists\n> - This is a **\"second wave\" / AI era** of data center growth — announcements reference hundreds of MW and billions of dollars\n\n---\n\n## Side-by-Side Summary\n\n| Category | New York | North Carolina |\n|---|---|---|\n| **OEM HQs** | None HQ'd in NY (offices only) | **Honeywell HQ (Charlotte), Trane HQ (Davidson)** |\n| **Integrators (identified)** | **16 companies** (NYC + tri-state) | **14 companies** (Charlotte + Raleigh + statewide) |\n| **Property Mgmt** | SL Green (32.5M sf), Brookfield (26.6M sf), Vornado (20.6M sf), RXR (26.5M sf) + Big 4 | JLL (1,068 employees), CBRE (743), Highwoods (1.6M sf Class AA) |\n| **Healthcare** | NYC H+H (11 hospitals), Northwell (21), NYP (10), Sinai (8), NYU Langone (6), Montefiore (4) | Atrium/Advocate (67 hospitals), Novant (15), UNC (14), Duke (3), WakeMed (3) |\n| **Higher Ed** | NYU (175+ buildings), Columbia, CUNY (25 campuses), SUNY | NC State (2,100 acres), Duke (8,600 acres), UNC, UNC Charlotte, Wake Tech |\n| **Data Centers** | Limited (land/power constraints) | **Massive boom** — $10B+ AWS, $1.2B Google, 400MW Digital Realty, 40+ operating |\n| **Union presence** | **Strong** — IUOE Local 94 (5,000+ members); pushes pay up | Minimal — right-to-work state |\n| **Unique driver** | **LL97**: 50K buildings, $20B retrofit market, 141K jobs by 2030 | **Data center corridor**: 15x construction growth, power demand doubling |\n| **Job volume (BAS)** | 64 on Glassdoor, 805+ on Indeed | 186 on Glassdoor, 220+ on Indeed |\n| **Total BAS-adjacent jobs** | 136 automation tech (Glassdoor), 689 controls tech (Glassdoor) | 371 building automation jobs on LinkedIn (Raleigh alone) |\n| **Key salary factor** | Union contracts + LL97 demand = premium pay | OEM HQ proximity + data center premium; lower COL = better purchasing power |\n"}, {"key": "ny-contacts", "label": "NY Contacts", "content": "# New York BAS Employer Contact Directory\n\n---\n\n## 1. BUILDING PRODUCT MANUFACTURERS (OEMs)\n\n### Johnson Controls\n| | |\n|---|---|\n| **NYC Address** | 60 East 42nd Street, 29th Floor, New York, NY 10165 |\n| **Phone** | (646) 658-6788 |\n| **Website** | [johnsoncontrols.com](https://www.johnsoncontrols.com/) |\n| **BAS Page** | [johnsoncontrols.com/building-automation-and-controls](https://www.johnsoncontrols.com/building-automation-and-controls) |\n| **Careers** | [jobs.johnsoncontrols.com](https://jobs.johnsoncontrols.com/) |\n\n### Siemens Building Technologies\n| | |\n|---|---|\n| **NYC Address** | 527 Madison Avenue, New York, NY 10022 |\n| **Phone** | Use contact page (see below) |\n| **Website** | [siemens.com/buildingtechnologies](https://www.siemens.com/us/en/products/buildingtechnologies/entry.html) |\n| **BT Contact Center** | [siemens.com/buildingtechnologies/contact](https://www.siemens.com/us/en/products/buildingtechnologies/contact.html) |\n| **Careers** | [siemens.com/jobs](https://www.siemens.com/us/en/company/jobs/search-careers.html) |\n| **Note** | Notable NYC projects include Javits Center energy management system |\n\n### Honeywell Building Technologies\n| | |\n|---|---|\n| **NYC Address** | 150 East 52nd Street, New York, NY 10022 (corporate office) |\n| **Website** | [buildings.honeywell.com](https://buildings.honeywell.com/us/en/home) |\n| **Find a BAS Partner** | [buildings.honeywell.com/find-partner](https://buildings.honeywell.com/us/en/support/find-partner) |\n| **Careers (BT)** | [careers.honeywell.com/buildings](https://careers.honeywell.com/buildings) |\n| **Contact** | [buildings.honeywell.com/contact-us](https://buildings.honeywell.com/us/en/contact-us) |\n\n### Carrier / Automated Logic\n| | |\n|---|---|\n| **NY/NJ Address** | 100 Delawanna Avenue, 4th Floor, Clifton, NJ 07014 |\n| **Phone** | (973) 569-4700 |\n| **Fax** | (973) 569-4701 |\n| **Website** | [automatedlogic.com](https://www.automatedlogic.com/en/) |\n| **NY/NJ Branch** | [automatedlogic.com/branch-locations/ny-nj](https://www.automatedlogic.com/en/company/branch-locations/ny-nj/) |\n| **Careers** | [jobs.carrier.com](https://jobs.carrier.com/en/search-jobs/automated+logic) |\n| **Note** | Won Project of the Year for 43-story NYC skyscraper using WebCTRL |\n\n### Trane Technologies\n| | |\n|---|---|\n| **NYC Address** | 10-27 46th Avenue, Long Island City, NY 11101 |\n| **Phone** | (718) 269-3600 |\n| **Hours** | Mon-Fri 8:00 AM - 5:00 PM |\n| **Website** | [trane.com](https://www.trane.com/commercial/north-america/us/en.html) |\n| **NYC Office Page** | [trane.com/new-york](https://www.trane.com/commercial/north-america/us/en/contact-us/locate-sales-offices/new-york.html) |\n| **Careers** | [careers.tranetechnologies.com](https://careers.tranetechnologies.com/global/en/home) |\n\n### Schneider Electric\n| | |\n|---|---|\n| **NYC Address** | 112 West 34th Street, New York, NY |\n| **Phone** | (646) 335-0220 |\n| **Website** | [se.com](https://www.se.com/us/en/) |\n| **BAS/Building Mgmt** | [se.com/building-management](https://www.se.com/ww/en/work/products/building-management/) |\n| **Careers** | [careers.se.com/jobs](https://careers.se.com/jobs) |\n\n---\n\n## 2. SYSTEMS INTEGRATORS & CONTROLS CONTRACTORS\n\n### T.M. Bier & Associates (TMBA)\n| | |\n|---|---|\n| **HQ Address** | 79 Hazel Street, Glen Cove, NY 11542 |\n| **NYC Address** | 600 5th Avenue, Floor 2, New York, NY 10020 |\n| **Phone** | (516) 674-3700 |\n| **Email** | info@tmba.com |\n| **Website** | [tmba.com](https://www.tmba.com/) |\n| **Leadership** | Rob Bier, CEO; Ted Bier, Founder & Board Chairman |\n\n### Control Solutions Group\n| | |\n|---|---|\n| **Address** | 225 West 34th Street, Suite 301, New York, NY 10122 |\n| **Phone** | (212) 871-7710 |\n| **Fax** | (212) 871-7715 |\n| **Website** | [controlsolutionsgroup.com](https://controlsolutionsgroup.com/) |\n| **Parent** | Part of EMCOR Group, Inc. |\n| **Note** | Founded 1998. 24/7 service across all five NYC boroughs. |\n\n### Control Technologies Inc. (CTI)\n| | |\n|---|---|\n| **NYC Address** | 405 Lexington Avenue, New York, NY |\n| **Long Island** | 500 Valley Stream, NY |\n| **Upstate** | 438 Route 3, Plattsburgh, NY 12901 |\n| **Phone** | (631) 956-7200 |\n| **Website** | [controltechinc.com](https://www.controltechinc.com/) |\n| **Note** | Building automation since 1986; statewide coverage |\n\n### React Technical (React Industries, Inc.)\n| | |\n|---|---|\n| **Address** | 3402 Review Avenue, Long Island City, NY 11101 |\n| **Phone** | (718) 392-3400 |\n| **Email** | info@reacthvac.com |\n| **Website** | [reacthvac.com](https://www.reacthvac.com/) |\n| **Hours** | Mon-Fri 7:30 AM - 5:00 PM |\n| **Note** | Now part of Ainsworth Inc. |\n\n### Building Automation Solutions (BAS NY)\n| | |\n|---|---|\n| **Address** | West Hempstead, NY |\n| **Phone** | (516) 232-2336 |\n| **Email** | office@basnewyork.com |\n| **Website** | [basnewyork.com](https://basnewyork.com/) |\n| **Leadership** | John Gil, President |\n| **Hours** | Mon-Fri 7:00 AM - 5:00 PM |\n\n### EJS New York\n| | |\n|---|---|\n| **Address** | One Penn Plaza, Suite 3301, New York, NY 10119 |\n| **Phone (Sales)** | (516) 747-9477 |\n| **Phone (Parts)** | (929) 593-1312 |\n| **Email (Sales)** | Sales.ny@ejsnewyork.com |\n| **Email (Parts)** | Parts.ny@ejsnewyork.com |\n| **Website** | [ejsnewyork.com](https://ejsnewyork.com/) |\n| **Key Contacts** | Jason Eitel (Sales/Hospitality); Stephen Madaffari (Business Dev/Healthcare) |\n\n### Power-Flo Technologies\n| | |\n|---|---|\n| **Address** | 270 Park Avenue, New Hyde Park, NY 11040 |\n| **Phone** | (516) 812-6800 |\n| **Fax** | (516) 812-6990 |\n| **Website** | [powerflotechnologies.com](https://www.powerflotechnologies.com/) |\n| **Leadership** | Jerry DiCunzolo, CEO (since 1984) |\n\n### Stark Tech\n| | |\n|---|---|\n| **HQ Address** | 2100 Wehrle Drive, Buffalo, NY 14221 |\n| **Phone** | (716) 693-4490 |\n| **Website** | [starktech.com](https://starktech.com/) |\n| **Leadership** | Randy Urschel, CEO; Tim Geiger, President |\n| **Offices** | Buffalo, Rochester, Binghamton, Long Island, East Syracuse, Corning, Ogdensburg, Albany, New Paltz, NJ, FL |\n\n### EMCOR Services NY/NJ\n| | |\n|---|---|\n| **NY Address** | 245 Newtown Road, Suite 305, Plainview, NY 11803 |\n| **NJ Address** | 210 West Parkway, Unit 3-1, Pompton Plains, NJ 07444 |\n| **Phone (NY)** | (516) 727-4450 |\n| **Phone (NJ)** | (973) 839-8339 |\n| **Website** | [emcorservicesnynj.com](https://emcorservicesnynj.com/) |\n| **Leadership** | Tim Murphy, President |\n| **Parent** | EMCOR Group (NYSE: EME) — Fortune 500 |\n\n### Scientific Building Automation\n| | |\n|---|---|\n| **Phone** | (973) 250-2981 |\n| **Website** | [scientificba.com](https://www.scientificba.com/) |\n| **Leadership** | Michael Leach, Founder & President |\n| **Coverage** | NJ, NY, CT, PA |\n| **Note** | 50+ years of industry expertise |\n\n### Automated Building Solutions\n| | |\n|---|---|\n| **Address** | P.O. Box 3186, South Amboy, NJ 08879 |\n| **Phone** | (732) 294-1004 |\n| **Fax** | (732) 727-7662 |\n| **Email** | info@absautomation.com |\n| **Website** | [absautomation.com](https://absautomation.com/) |\n| **Leadership** | Lee Pierce, President & Owner; Kris Gobo, VP of Operations & Business Dev |\n\n### Unitemp MDI\n| | |\n|---|---|\n| **Address** | 26 Worlds Fair Drive, Units B, C & D, Somerset, NJ 08873 |\n| **Phone** | (877) 704-4822 |\n| **Website** | [unitempinc.com](https://www.unitempinc.com/) |\n| **Leadership** | Ray Hadiyan, President; Chris Contino, Controls Division Manager |\n\n### CMS HVAC (Climate Mechanical Services)\n| | |\n|---|---|\n| **Address** | 160 Lincoln Avenue, Hamilton Township, NJ 08610 |\n| **Phone** | (609) 585-3130 |\n| **Email** | info@cmshvacnj.com |\n| **Website** | [cmshvacnj.com](https://cmshvacnj.com/) |\n| **Note** | Founded 2017. Authorized Honeywell dealer. 24/7 emergency service. License #19HC00885900 |\n\n### Mid-Atlantic Controls (MACC)\n| | |\n|---|---|\n| **HQ Address** | 8511 Oakview Avenue, Richmond, VA 23228 |\n| **Phone** | (804) 262-4923 |\n| **Website** | [midatlanticcontrols.com](https://www.midatlanticcontrols.com/) |\n| **Leadership** | Craig Turlington, President; Mike Startt, Co-Founder & VP Sales/Estimating |\n| **Coverage** | VA, MD, NC, WV, DE, NJ and surrounding states |\n\n---\n\n## 3. COMMERCIAL REAL ESTATE / PROPERTY MANAGERS\n\n### SL Green Realty — Largest Office Landlord in Manhattan\n| | |\n|---|---|\n| **Address** | One Vanderbilt Avenue, New York, NY 10017 |\n| **Phone** | (212) 594-2700 |\n| **Email** | General.Inquiries@slgreen.com |\n| **Website** | [slgreen.com](https://slgreen.com) |\n| **Careers** | [slgreen.com/careers](https://slgreen.com/careers/) |\n| **Portfolio** | 32.5M sq ft (59 buildings) |\n\n### Brookfield Properties\n| | |\n|---|---|\n| **Address** | 250 Vesey Street, 15th Floor, New York, NY 10281 |\n| **Phone** | (212) 417-7000 |\n| **Website** | [brookfieldproperties.com](https://www.brookfieldproperties.com) |\n| **Careers** | [brookfieldproperties.com/careers](https://www.brookfieldproperties.com/en/who-we-are/careers/) |\n| **Jobs Portal** | [brookfield.wd5.myworkdayjobs.com](https://brookfield.wd5.myworkdayjobs.com/brookfieldproperties) |\n| **Portfolio** | 26.6M sq ft in Manhattan |\n\n### Vornado Realty Trust\n| | |\n|---|---|\n| **Address** | 888 Seventh Avenue, New York, NY 10019 |\n| **Phone** | (212) 894-7000 |\n| **Website** | [vno.com](https://www.vno.com) |\n| **Careers** | [vno.com/careers](https://www.vno.com/careers/overview) |\n| **Contact** | [vno.com/contact-us](https://www.vno.com/contact-us/general-contact) |\n| **Portfolio** | 20.6M sq ft (33 buildings) |\n\n### RXR Realty\n| | |\n|---|---|\n| **NYC Address** | 75 Rockefeller Plaza, New York, NY 10019 |\n| **Phone (NYC)** | (212) 797-1330 |\n| **Long Island** | 625 RXR Plaza, Uniondale, NY 11556 — (516) 506-6000 |\n| **Email** | RXR@rxr.com |\n| **Website** | [rxr.com](https://rxr.com) |\n| **Careers** | [job-boards.greenhouse.io/rxr](https://job-boards.greenhouse.io/rxr) |\n| **Portfolio** | 26.5M sq ft managed |\n\n### Silverstein Properties\n| | |\n|---|---|\n| **Address** | 250 Greenwich Street, New York, NY 10007 |\n| **Phone** | (212) 490-0666 |\n| **Email (Reception)** | Reception@Silvprop.com |\n| **Email (HR/Careers)** | Workwithus@Silvprop.com |\n| **Website** | [silversteinproperties.com](https://www.silversteinproperties.com) |\n| **Careers** | [silversteinproperties.com/careers](https://www.silversteinproperties.com/careers) |\n\n### Related Companies\n| | |\n|---|---|\n| **Address** | 60 Columbus Circle, New York, NY 10023 |\n| **Phone** | (212) 801-1000 |\n| **Website** | [related.com](https://www.related.com) |\n| **Careers** | [related.jobs](https://www.related.jobs/careers-home/) |\n\n### Tishman Speyer\n| | |\n|---|---|\n| **Address** | 45 Rockefeller Plaza, New York, NY 10111 |\n| **Phone** | (212) 715-0300 |\n| **Website** | [tishmanspeyer.com](https://www.tishmanspeyer.com) |\n| **Careers** | [tishmanspeyer.com/careers](https://www.tishmanspeyer.com/careers) |\n| **Jobs Portal** | [ts.wd5.myworkdayjobs.com](https://ts.wd5.myworkdayjobs.com/tishmanspeyer) |\n\n### Boston Properties (BXP)\n| | |\n|---|---|\n| **NYC Address** | 599 Lexington Avenue, New York, NY 10022 |\n| **Phone (NYC)** | (212) 326-4000 |\n| **Website** | [bxp.com](https://www.bxp.com) |\n| **Careers** | [bxp.com/working-here](https://www.bxp.com/working-here) |\n| **Jobs Portal** | [bxp.dejobs.org](https://bxp.dejobs.org/jobs/) |\n\n> **Note:** Facilities/engineering department contacts are not publicly listed by any of these REITs (standard practice). Best approach: call main number and ask for facilities/property management, or check careers pages for open building engineer positions.\n\n---\n\n## 4. HEALTHCARE SYSTEMS\n\n### NYC Health + Hospitals\n| | |\n|---|---|\n| **HQ Address** | 50 Water Street, New York, NY 10004 |\n| **Phone** | (844) 692-4692 |\n| **Website** | [nychealthandhospitals.org](https://www.nychealthandhospitals.org/) |\n| **Careers** | [employment.nychhc.org](https://employment.nychhc.org/) |\n| **Scale** | 11 hospitals, 70+ patient care locations; 700+ facilities engineers/tradespeople |\n\n### NYU Langone Health\n| | |\n|---|---|\n| **Address** | 550 First Avenue, New York, NY 10016 |\n| **Phone** | (646) 929-7800 |\n| **Website** | [nyulangone.org](https://nyulangone.org/) |\n| **Careers** | [jobs.nyulangone.org](https://jobs.nyulangone.org/) |\n\n### NewYork-Presbyterian\n| | |\n|---|---|\n| **Address** | 525 East 68th Street, New York, NY 10065 |\n| **Phone** | (212) 746-5454 |\n| **Website** | [nyp.org](https://www.nyp.org/) |\n| **Careers** | [careers.nyp.org](https://careers.nyp.org/) |\n| **Note** | Facilities & Engineering roles listed under \"Hospitality & Operations\" career category |\n\n### Mount Sinai Health System\n| | |\n|---|---|\n| **Address** | One Gustave L. Levy Place, New York, NY 10029 |\n| **Phone** | (212) 241-6500 |\n| **HR Office** | 150 E 42nd Street, 4th Floor — (646) 605-4310 |\n| **Website** | [mountsinai.org](https://www.mountsinai.org/) |\n| **Careers** | [careers.mountsinai.org](https://careers.mountsinai.org/) |\n\n### Northwell Health\n| | |\n|---|---|\n| **Address** | 2000 Marcus Avenue, New Hyde Park, NY 11042 |\n| **Phone** | (888) 214-4065 |\n| **Website** | [northwell.edu](https://www.northwell.edu/) |\n| **Careers** | [jobs.northwell.edu](https://jobs.northwell.edu/) |\n| **Note** | Search \"Facilities and Support Services\" career category; 21 hospitals |\n\n### Montefiore Medical Center\n| | |\n|---|---|\n| **Address** | 111 East 210th Street, Bronx, NY 10467 |\n| **Phone** | (718) 920-4321 |\n| **Website** | [montefiore.org](https://www.montefiore.org/) |\n| **Careers** | [careers.montefiore.org](https://careers.montefiore.org/) |\n| **Note** | Has dedicated Facilities Engineering & Operations Department with licensed operating engineers |\n\n---\n\n## 5. HIGHER EDUCATION\n\n### New York University (NYU)\n| | |\n|---|---|\n| **Facilities Helpdesk** | (212) 998-1001 |\n| **Facilities Page** | [nyu.edu/facilities-operations-maintenance](https://www.nyu.edu/life/campus-resources/facilities-operations-maintenance.html) |\n| **Careers** | [careers-nyu.icims.com](https://careers-nyu.icims.com/) |\n| **Scale** | 175+ buildings across Manhattan & Brooklyn |\n\n### Columbia University\n| | |\n|---|---|\n| **Facilities Service Center** | (212) 854-2222 (24/7) |\n| **Facilities Website** | [cufo.columbia.edu](https://cufo.columbia.edu/) |\n| **Facilities Careers** | [cufo.columbia.edu/careers](https://cufo.columbia.edu/content/careers) |\n| **Staff Directory** | [cufo.columbia.edu/directory](https://cufo.columbia.edu/directory) |\n\n### CUNY System\n| | |\n|---|---|\n| **Central Office** | 555 West 57th Street, New York, NY 10019 |\n| **Phone** | (646) 746-4200 |\n| **Facilities Dept Email** | CUNY.Builds@cuny.edu |\n| **Careers** | [cuny.jobs](https://cuny.jobs/) |\n| **Scale** | 25 campuses across NYC |\n\n### Cornell Tech\n| | |\n|---|---|\n| **Address** | 2 West Loop Road, Roosevelt Island, NY 10044 |\n| **HR Email** | hr@tech.cornell.edu |\n| **Careers** | [tech.cornell.edu/jobs](https://tech.cornell.edu/jobs) |\n\n---\n\n## 6. GOVERNMENT / PUBLIC\n\n### NYC DCAS (Dept. of Citywide Administrative Services)\n| | |\n|---|---|\n| **Address** | 1 Centre Street, New York, NY 10007 |\n| **Phone** | (212) 669-1357 |\n| **Website** | [nyc.gov/dcas](https://www.nyc.gov/site/dcas/) |\n| **Careers** | [nyc.gov/dcas/work-for-dcas](https://www.nyc.gov/site/dcas/about/work-for-dcas.page) |\n| **Note** | Manages city buildings; hires stationary engineers/BAS techs via civil service exams. LL97 compliance driving massive BAS upgrade demand. |\n\n### Port Authority of NY/NJ\n| | |\n|---|---|\n| **Address** | 4 World Trade Center, 150 Greenwich Street, New York, NY 10007 |\n| **Phone** | (212) 435-7000 |\n| **Website** | [panynj.gov](https://www.panynj.gov/) |\n| **Careers** | [jointheportauthority.com](https://jointheportauthority.com/) |\n\n### MTA (Metropolitan Transportation Authority)\n| | |\n|---|---|\n| **Address** | 2 Broadway, New York, NY 10004 |\n| **Phone** | (718) 330-1234 |\n| **Website** | [mta.info](https://new.mta.info/) |\n| **Careers** | [careers.mta.org](https://careers.mta.org/) |\n| **Note** | Dedicated search pages for Engineering and Facilities Maintenance roles |\n\n---\n\n## 7. UNION\n\n### IUOE Local 94\n| | |\n|---|---|\n| **Address** | 331-337 West 44th Street, New York, NY 10036 |\n| **Phone** | (212) 331-1800 |\n| **Website** | [local94.com](https://www.local94.com/) |\n| **Membership** | 5,000+ building engineers across NYC |\n| **Note** | Represents engineers operating HVAC, BAS, and all mechanical systems in public, private, residential, and commercial buildings. Has apprenticeship programs. |\n\n---\n\n*All contact information sourced from public company websites and web searches, February 2026. Verify before use as details may change.*\n"}, {"key": "nc-contacts", "label": "NC Contacts", "content": "# North Carolina BAS Employer Contact Directory\n\n---\n\n## 1. BUILDING PRODUCT MANUFACTURERS (OEMs)\n\n### Honeywell — Global HQ\n| | |\n|---|---|\n| **Address** | 855 S Mint St, Charlotte, NC 28202 |\n| **Phone** | (877) 841-2840 |\n| **Website** | [honeywell.com](https://www.honeywell.com) |\n| **Careers** | [careers.honeywell.com](https://careers.honeywell.com/us/en) |\n\n### Trane Technologies — Corporate HQ\n| | |\n|---|---|\n| **HQ Address** | 800-E Beaty Street, Davidson, NC 28036 |\n| **HQ Phone** | (704) 655-4000 |\n| **Charlotte Sales Office** | 4501 S Tryon St, Charlotte, NC 28217 |\n| **Sales Phone** | (704) 525-9600 |\n| **Website** | [tranetechnologies.com](https://www.tranetechnologies.com) |\n| **Careers** | [careers.tranetechnologies.com](https://careers.tranetechnologies.com/global/en/home) |\n\n### Carrier\n| | |\n|---|---|\n| **Address** | 9701 Old Statesville Rd, Charlotte, NC 28269 |\n| **Phone** | (704) 921-3800 |\n| **Commercial Service** | (704) 521-6215 or (800) 743-1944 |\n| **Website** | [carrier.com](https://www.carrier.com) |\n| **Careers** | [jobs.carrier.com](https://jobs.carrier.com/en) |\n\n### Siemens Building Technologies\n| | |\n|---|---|\n| **Charlotte Address** | 5101 Westinghouse Blvd, Charlotte, NC |\n| **Contact Center** | [siemens.com/buildingtechnologies/contact](https://www.siemens.com/us/en/products/buildingtechnologies/contact.html) |\n| **NC Overview** | [siemens.com/north-carolina](https://www.siemens.com/us/en/company/about/siemens-in-the-usa/north-carolina.html) |\n| **Careers** | [jobs.siemens.com](https://jobs.siemens.com) |\n| **Note** | Smart Infrastructure Electrification & Automation HQ in NC; 8 locations statewide |\n\n### ABM Industries\n| | |\n|---|---|\n| **Address** | 10420 Harris Oaks Blvd, Suite R, Charlotte, NC 28269 |\n| **Phone (Sales)** | (704) 596-7004 |\n| **Phone (HVAC/Building Services)** | (704) 598-9889 |\n| **Phone (Electrical)** | (704) 788-2380 |\n| **Website** | [abm.com](https://www.abm.com) |\n| **Careers** | [abm.com/careers](https://www.abm.com/careers) |\n\n---\n\n## 2. SYSTEMS INTEGRATORS & CONTROLS CONTRACTORS\n\n### Charlotte Temperature Controls (CTC)\n| | |\n|---|---|\n| **Address** | 1705-A Orr Industrial Ct, Suite A, Charlotte, NC 28213 |\n| **Phone** | (704) 509-0707 |\n| **Website** | [ctccontrols.com](https://ctccontrols.com/) |\n| **Leadership** | Catherine Aldridge (CEO); Chad Starnes (Controls Division Mgr); Hazel Carter (Service Mgr & Estimator) |\n| **Founded** | 1988 by James Anthony (Andy) Starnes |\n| **Note** | Authorized Honeywell contractor; Niagara Tridium integrator; BACnet/Lon |\n\n### Controls Service Group (CSG)\n| | |\n|---|---|\n| **Address** | 1064 Van Buren Ave, Suite 2, Indian Trail, NC 28079 |\n| **Phone** | (704) 684-4055 |\n| **Email** | Accounting@csg-nc.com |\n| **Website** | [csg-nc.com](https://www.csg-nc.com/) |\n| **Founded** | 2009 |\n\n### CMS Controls (Charlotte)\n| | |\n|---|---|\n| **Address** | 1338 Hundred Oaks Drive, Suite C, Charlotte, NC 28217 |\n| **Phone** | (980) 216-6330 |\n| **Email** | info-clt@cms-controls.com |\n| **Website** | [charlotte.cms-controls.com](https://charlotte.cms-controls.com/) |\n| **Key Contacts** | Chris Payton (Operations Mgr); Jason Pippin (Business Dev Mgr) |\n\n### Carolina Air Solutions\n| | |\n|---|---|\n| **Address** | 9224 Stockport Place, Charlotte, NC 28273 |\n| **Phone** | (704) 525-2400 |\n| **Website** | [carolinaairsolutions.com](https://www.carolinaairsolutions.com/) |\n| **Founded** | 2002 by Larry D. Copeland and Rodney L. Gordon |\n| **Note** | Authorized Carrier Comfort Network dealer |\n\n### MSS Solutions\n| | |\n|---|---|\n| **Address** | 11524 Wilmar Blvd, Charlotte, NC 28273 |\n| **Phone** | (704) 372-4344 / (704) 970-3133 |\n| **Email (Sales)** | sales@msssolutions.com |\n| **Email (Service)** | service@msssolutions.com |\n| **Website** | [msssolutions.com](https://msssolutions.com/) |\n| **Leadership** | Jennifer Tindal (CFO) |\n| **Founded** | 1996 |\n| **Scale** | 501-1,000 employees; 8 offices across the Carolinas; 7 service lines (HVAC, BAS, fire alarm, security, network integration, energy mgmt, mechanical construction) |\n\n### Hoffman Building Technologies (Charlotte Office)\n| | |\n|---|---|\n| **Address** | 2833 Griffith St, Charlotte, NC 28203 |\n| **Phone** | (704) 369-8642 |\n| **24-Hr Emergency** | (877) 382-9669 |\n| **Website** | [hbtech.com](https://hbtech.com/) |\n| **Leadership** | Michael Rushing (President, eff. Jan 2025); Jim Bingham (CEO, Hoffman family); Randall Doss (VP Service); Chris Stegall (VP Operations) |\n| **Founded** | 1985 (HQ Appleton, WI) |\n\n### AirTight FaciliTech (ATF Services)\n| | |\n|---|---|\n| **Address** | 1338 Hundred Oaks Drive, Suite C, Charlotte, NC 28217 |\n| **Phone** | (704) 568-4121 |\n| **Website** | [atftservices.com](https://www.atftservices.com/) |\n| **Leadership** | Clay Cooper (President); Gregory Wiseman (CEO) |\n| **Founded** | 1999 |\n| **Parent** | Service Logic company |\n\n### Engineered Control Solutions (ECS) — Now Climatec (Bosch)\n| | |\n|---|---|\n| **Address** | 230 Jarco Drive, Fuquay-Varina, NC 27526 |\n| **Phone** | (919) 567-0706 |\n| **Toll-Free** | (866) 998-2236 |\n| **Website** | [ecscontrols.net](https://ecscontrols.net/) |\n| **Leadership** | Lee Revis (CEO/Owner); Jim Thomas (VP) |\n| **Founded** | 1999 |\n| **Offices** | Fuquay-Varina, Wilmington NC, Charlotte NC, Greenville SC |\n| **Note** | Acquired by Climatec (Bosch) in August 2024; may now operate under Climatec brand |\n\n### CCAC Building Solutions\n| | |\n|---|---|\n| **HQ Address** | 1804 Fairfax Rd, Suite A, Greensboro, NC 27407 |\n| **Other Locations** | Garner, NC and Charlotte, NC |\n| **Phone (24/7)** | (888) 967-0234 |\n| **Website** | [ccacbuildingsolutions.com](https://www.ccacbuildingsolutions.com/) |\n| **Leadership** | Robert (Bobby) Allison (President & Owner); Michael Corriher (Mechanical Projects Director & Chief Engineer) |\n| **Note** | 50+ years in operation; in-house software engineers |\n\n### Mechanical Contractors LLC (MCI)\n| | |\n|---|---|\n| **Charlotte Address** | 1733 University Commercial Place, Charlotte, NC 28213 |\n| **Mailing** | PO Box 562357, Charlotte, NC 28256 |\n| **Phone (Charlotte)** | (704) 372-2460 / (980) 581-1179 |\n| **Phone (Raleigh)** | (919) 790-2990 |\n| **Website** | [mcihvac.com](https://www.mcihvac.com/) |\n| **Key Contacts** | Thomas H. Phoenix, P.E., FASHRAE, LEED AP — (704) 688-5806; Timothy Shelton (Group Mgr, Controls Systems Integration) |\n| **Founded** | 1948 |\n\n### Environmental Controls & Mechanical (ECM)\n| | |\n|---|---|\n| **Location** | Charlotte / Mecklenburg County, NC |\n| **Phone** | (704) 910-2692 |\n| **Email** | info@ecmsolution.com |\n| **Website** | [ecmsolution.com](https://www.ecmsolution.com/) |\n| **Leadership** | Brett Downs (Founder & Owner) |\n| **Founded** | 2011 |\n| **Note** | Specializes in BAS for commercial, industrial, schools, and government |\n\n### Facility Systems Services (FSS)\n| | |\n|---|---|\n| **Address** | 930 Matthews-Mint Hill Rd, Matthews, NC 28105 |\n| **Mailing** | PO Box 1540, Matthews, NC 28106 |\n| **Phone** | (704) 443-7059 |\n| **Email** | info@fss-i.com |\n| **Website** | [fss-i.com](https://fss-i.com/) |\n| **Leadership** | Linfu (Frank) Zhang (President) |\n| **Founded** | 2015 |\n\n### Platinum Building Automation\n| | |\n|---|---|\n| **Address** | 6527 Hudspeth Rd, Harrisburg, NC 28075 |\n| **Phone** | (704) 765-8503 |\n| **Email** | service@platinumbuildingautomation.com |\n| **Website** | [platinumbuildingautomation.com](https://www.platinumbuildingautomation.com/) |\n| **Leadership** | Ryan Hobday (Co-Founder & Owner); Jason Williams (Co-Founder & Dir, Business Ops); Charlie Dow (Co-Founder); Robert Hoke (Dir of Engineering & Technology) |\n| **Founded** | 2011 |\n| **Note** | Maintains 2M+ sq ft of real estate |\n\n---\n\n## 3. COMMERCIAL REAL ESTATE / PROPERTY MANAGERS\n\n### JLL (Jones Lang LaSalle) — #1 CRE Firm in Charlotte\n| | |\n|---|---|\n| **Address** | 525 N Tryon St, Suite 500, Charlotte, NC 28202 |\n| **Phone** | (704) 376-1876 |\n| **Website** | [us.jll.com](https://www.us.jll.com) |\n| **Charlotte Office** | [jll.com/locations/charlotte](https://www.jll.com/en-us/locations/charlotte) |\n| **Careers** | [jll.com/careers](https://www.jll.com/en-us/careers) |\n| **Scale** | 1,068 local employees |\n\n### CBRE\n| | |\n|---|---|\n| **Address** | 1120 South Tryon Street, Suite 200, Charlotte, NC 28203 |\n| **Phone** | (704) 376-7979 |\n| **Fax** | (704) 331-1259 |\n| **Website** | [cbre.com](https://www.cbre.com) |\n| **Charlotte Office** | [cbre.com/offices/charlotte](https://www.cbre.com/offices/corporate/charlotte) |\n| **Careers** | [cbre.com/careers](https://www.cbre.com/careers) |\n| **Scale** | 743 local employees |\n\n### Cushman & Wakefield\n| | |\n|---|---|\n| **Address** | 300 S Tryon St, Suite 1110, Charlotte, NC 28202 |\n| **Phone** | (704) 375-7771 |\n| **Hours** | Mon-Fri 8:00 AM - 5:00 PM |\n| **Website** | [cushmanwakefield.com](https://www.cushmanwakefield.com) |\n| **Charlotte Office** | [cushmanwakefield.com/offices/charlotte](https://www.cushmanwakefield.com/en/united-states/offices/charlotte) |\n| **Careers** | [careers.cushmanwakefield.com](https://careers.cushmanwakefield.com/en/) |\n| **Scale** | 276 local employees |\n\n### Highwoods Properties — HQ\n| | |\n|---|---|\n| **Address** | 150 Fayetteville Street, Suite 1400, Raleigh, NC 27601 |\n| **Phone** | (919) 872-4924 |\n| **Toll-Free** | (866) 449-6637 |\n| **Website** | [highwoods.com](https://www.highwoods.com) |\n| **Careers** | [highwoods.com/careers](https://www.highwoods.com/careers) |\n| **Charlotte Portfolio** | 1.6M sq ft Class AA at Legacy Union |\n\n### Lincoln Harris\n| | |\n|---|---|\n| **Address** | 4725 Piedmont Row Drive, Suite 800, Charlotte, NC 28210 |\n| **Phone** | (704) 714-7600 |\n| **Website** | [lincolnharris.com](https://www.lincolnharris.com) |\n| **Careers** | [lpc.com/careers](https://lpc.com/about-us/careers/) |\n\n### Cousins Properties\n| | |\n|---|---|\n| **Address** | 201 N Tryon St, Suite 1450, Charlotte, NC 28202 |\n| **Phone** | (704) 372-3857 |\n| **Website** | [cousins.com](https://cousins.com) |\n| **Careers** | [cousins.com/careers](https://cousins.com/careers) |\n\n### Childress Klein\n| | |\n|---|---|\n| **Address** | 301 South College Street, Suite 2800, Charlotte, NC 28202 |\n| **Phone** | (704) 342-9000 |\n| **Email** | charlotte@childressklein.com |\n| **Website** | [childressklein.com](https://www.childressklein.com) |\n| **Careers** | [childressklein.com/careers](https://www.childressklein.com/careers) |\n| **Jobs Portal** | [childressklein.applicantpool.com](https://childressklein.applicantpool.com/jobs/) |\n\n---\n\n## 4. HEALTHCARE SYSTEMS\n\n### Atrium Health / Advocate Health\n| | |\n|---|---|\n| **Address** | 1000 Blythe Blvd, Charlotte, NC 28203 |\n| **Phone** | (704) 355-2000 |\n| **Website** | [atriumhealth.org](https://atriumhealth.org/) |\n| **Careers** | [careers.atriumhealth.org](https://careers.atriumhealth.org/) |\n| **Scale** | ~150,000 employees; 3rd-largest nonprofit health system in US |\n\n### Novant Health\n| | |\n|---|---|\n| **Address** | 2085 Frontis Plaza Blvd, Winston-Salem, NC 27103 |\n| **Phone** | (336) 718-7010 |\n| **Website** | [novanthealth.org](https://www.novanthealth.org/) |\n| **Careers** | [jobs.novanthealth.org](https://jobs.novanthealth.org/) |\n| **Scale** | 850+ locations across NC and SC |\n\n### Duke Health\n| | |\n|---|---|\n| **Address** | 40 Duke Medicine Circle, Durham, NC 27710 |\n| **Phone** | (919) 684-8111 |\n| **Website** | [dukehealth.org](https://www.dukehealth.org/) |\n| **Careers** | [careers.dukehealth.org](https://careers.dukehealth.org/us/en) |\n| **Scale** | 150+ specialty and primary care clinics across NC |\n\n### UNC Health\n| | |\n|---|---|\n| **Address** | 101 Manning Drive, Chapel Hill, NC 27514 |\n| **Phone** | (984) 974-1000 |\n| **Website** | [unchealth.org](https://www.unchealth.org/) |\n| **Careers** | [jobs.unchealthcare.org](https://jobs.unchealthcare.org/) |\n\n### WakeMed\n| | |\n|---|---|\n| **Address** | 3000 New Bern Avenue, Raleigh, NC 27610 |\n| **Phone** | (919) 350-8000 |\n| **HR/Employment** | (919) 350-8141 / Toll-free: (877) 213-3720 |\n| **Website** | [wakemed.org](https://www.wakemed.org/) |\n| **Careers** | [jobs.wakemed.org](https://jobs.wakemed.org/careers-home) |\n\n---\n\n## 5. HIGHER EDUCATION\n\n### UNC Charlotte — Facilities Management\n| | |\n|---|---|\n| **Address** | 9151 Cameron Boulevard, Charlotte, NC 28223 (Planning, Design & Construction, 2nd Floor) |\n| **Phone (Facilities)** | (704) 687-0615 |\n| **Phone (Service Requests)** | (704) 687-1311 |\n| **Website** | [facilities.charlotte.edu](https://facilities.charlotte.edu/) |\n| **HR Email** | employment@charlotte.edu |\n| **HR Phone** | (704) 687-0669 |\n| **Careers** | [jobs.charlotte.edu](https://jobs.charlotte.edu/) |\n| **Scale** | 951-acre campus; 7M+ sq ft; 460+ FM employees |\n\n### NC State University — Facilities Division\n| | |\n|---|---|\n| **Phone (Customer Service)** | (919) 515-2991 |\n| **Phone (Assoc. VC for Facilities)** | (919) 515-2732 |\n| **Website** | [facilities.ofa.ncsu.edu](https://facilities.ofa.ncsu.edu/) |\n| **Careers** | [jobs.ncsu.edu](https://jobs.ncsu.edu/) |\n| **Scale** | 10M+ sq ft of campus space |\n\n### Duke University — Facilities Management\n| | |\n|---|---|\n| **Phone (FMD Customer Service)** | (919) 684-2122 |\n| **HR Address** | 705 Broad St., Box 90496, Durham, NC 27705 |\n| **HR Phone** | (919) 684-5600 |\n| **Website** | [facilities.duke.edu](https://facilities.duke.edu) |\n| **Facilities Careers** | [careers.duke.edu/go/Facilities/8983200](https://careers.duke.edu/go/Facilities/8983200/) |\n\n### UNC Chapel Hill — Facilities Services\n| | |\n|---|---|\n| **Phone (Customer Service)** | (919) 962-3456 |\n| **HR Address** | 104 Airport Drive, Campus Box #1045, Chapel Hill, NC 27599 |\n| **HR Phone** | (919) 843-2300 |\n| **Website** | [facilities.unc.edu](https://facilities.unc.edu/) |\n| **Careers** | [unc.peopleadmin.com](https://unc.peopleadmin.com/) |\n\n### Wake Tech Community College — BAS Training Program\n| | |\n|---|---|\n| **Address** | 9101 Fayetteville Road, Raleigh, NC 27603 (Main / Southern Wake Campus) |\n| **Phone** | (919) 866-5000 |\n| **HR Phone** | (919) 866-7890 |\n| **HR Email** | jobs@waketech.edu |\n| **Website** | [waketech.edu](https://www.waketech.edu/) |\n| **BAS Program** | [waketech.edu/building-automation](https://www.waketech.edu/programs-courses/credit/building-automation) |\n| **Careers** | [schooljobs.com/careers/waketechedu](https://www.schooljobs.com/careers/waketechedu) |\n| **Note** | NSF-funded BAS program (Grant #2000190, $455,000). NC's first AAS in Building Automation Technology. Center for Building Technologies on Southern Wake Campus (opened Fall 2020). Labs equipped with Daikin, Mitsubishi, and LG systems. |\n\n### Charlotte-Mecklenburg Schools (CMS) — Facilities\n| | |\n|---|---|\n| **Address** | 4421 Stuart Andrew Boulevard, Charlotte, NC 28217 |\n| **Phone** | (980) 343-3000 |\n| **Website** | [cmsk12.org](https://www.cmsk12.org/) |\n| **Facilities Mgmt** | [cmsk12.org/operations/facilities-management](https://www.cmsk12.org/operations/facilities-management) |\n| **Building Services** | [cmsk12.org/operations/building-services](https://www.cmsk12.org/operations/building-services) |\n| **Careers** | [hiring.cmsk12.org](https://hiring.cmsk12.org/cms-open-positions) |\n| **Note** | 180+ schools; Building Services covers Maintenance, Engineering & Energy Management |\n\n---\n\n## 6. GOVERNMENT\n\n### City of Raleigh — Facilities / Engineering Services\n| | |\n|---|---|\n| **Address** | 222 W. Hargett St., Raleigh, NC 27601 (Avery Upchurch Municipal Complex) |\n| **Phone** | (919) 996-3100 |\n| **Website** | [raleighnc.gov](https://raleighnc.gov/) |\n| **Careers** | [governmentjobs.com/careers/raleighnc](https://www.governmentjobs.com/careers/raleighnc) |\n| **Note** | Engineering Services (4th Floor) oversees facility operations and maintenance |\n\n### City of Charlotte\n| | |\n|---|---|\n| **Address** | Charlotte City Hall, 600 E. Fourth St., Charlotte, NC 28202 |\n| **Website** | [charlottenc.gov](https://www.charlottenc.gov/) |\n| **Careers** | [charlottenc.gov/City-Jobs](https://www.charlottenc.gov/City-Government/City-Jobs) |\n| **Jobs Portal** | [charlottenc.wd12.myworkdayjobs.com](https://charlottenc.wd12.myworkdayjobs.com/citgov) |\n\n### Mecklenburg County — Asset & Facility Management\n| | |\n|---|---|\n| **Address** | Valerie C. Woodard Center, 3205 Freedom Dr., Suite 6000, Charlotte, NC 28208 |\n| **HR Address** | 700 E. Fourth St., Suite 220, Charlotte, NC 28202 |\n| **Website** | [afm.mecknc.gov](https://afm.mecknc.gov/) |\n| **Careers** | [hr.mecknc.gov](https://hr.mecknc.gov/) |\n| **Note** | Manages all County-owned real estate |\n\n### NC State Government — Facility Management (Dept. of Administration)\n| | |\n|---|---|\n| **Mailing** | NCDOA Facility Mgmt Division, 1313 Mail Service Center, Raleigh, NC 27699-1313 |\n| **Website** | [doa.nc.gov/facility-management](https://www.doa.nc.gov/divisions/facility-management) |\n| **Careers** | [oshr.nc.gov/work-nc](https://oshr.nc.gov/work-nc) |\n| **Jobs Portal** | [nc.wd108.myworkdayjobs.com](https://nc.wd108.myworkdayjobs.com/NC_Careers) |\n| **Scale** | ~7M gross sq ft of state agency facilities; 4,400+ state buildings; 76,000+ state employees |\n\n---\n\n## 7. DATA CENTERS\n\n### Digital Realty — Charlotte\n| | |\n|---|---|\n| **Existing Facility (CLT10)** | 113 North Myers Street, Charlotte, NC |\n| **New Campus (under dev)** | 12899 Moores Chapel Road, Charlotte, NC — 400MW planned, 3M sq ft |\n| **Corporate Phone** | (737) 281-0101 (Austin HQ) |\n| **Website** | [digitalrealty.com](https://www.digitalrealty.com/) |\n| **Charlotte Page** | [digitalrealty.com/charlotte](https://www.digitalrealty.com/data-centers/americas/charlotte) |\n| **Careers** | [careers.digitalrealty.com](https://careers.digitalrealty.com/) |\n\n### American Tower — Cary, NC\n| | |\n|---|---|\n| **Address** | 1 Fenton Main Street, Suite 300, Cary, NC 27511 |\n| **Phone** | (919) 468-0112 |\n| **Website** | [americantower.com](https://www.americantower.com/) |\n| **Careers** | [americantower.com/careers](https://www.americantower.com/us/careers) |\n\n### TierPoint — Raleigh\n| | |\n|---|---|\n| **Address** | 5301 Departure Drive, Raleigh, NC |\n| **Phone** | (833) 471-7100 |\n| **Website** | [tierpoint.com](https://www.tierpoint.com/) |\n| **Raleigh Page** | [tierpoint.com/raleigh](https://www.tierpoint.com/data-centers/north-carolina/raleigh/) |\n| **Careers** | [tierpoint.com/careers](https://www.tierpoint.com/about-us/careers/) |\n| **Scale** | 65,000 sq ft facility; 40,000 sq ft raised floor colocation |\n\n---\n\n*All contact information sourced from public company websites and business directories, February 2026. Verify before use as details may change.*\n"}];
+
+let currentDoc = 0;
+
+function buildNav() {
+  const nav = document.getElementById('navList');
+  nav.innerHTML = '';
+  DOCS.forEach((doc, i) => {
+    const item = document.createElement('div');
+    item.className = 'nav-item' + (i === currentDoc ? ' active' : '');
+    item.dataset.index = i;
+    item.innerHTML = '<span class="dot"></span>' + doc.label;
+    item.onclick = () => selectDoc(i);
+    nav.appendChild(item);
+  });
+}
+
+function selectDoc(index) {
+  currentDoc = index;
+  const content = document.getElementById('content');
+  content.innerHTML = marked.parse(DOCS[index].content);
+  content.style.animation = 'none';
+  content.offsetHeight;
+  content.style.animation = '';
+  document.querySelector('.main').scrollTop = 0;
+  document.querySelectorAll('.nav-item').forEach((el, i) => {
+    el.classList.toggle('active', i === index);
+  });
+  // close mobile sidebar
+  document.querySelector('.sidebar').classList.remove('open');
+  document.querySelector('.overlay').classList.remove('open');
+}
+
+function filterNav(query) {
+  const q = query.toLowerCase();
+  document.querySelectorAll('.nav-item').forEach(el => {
+    const label = el.textContent.toLowerCase();
+    const docContent = DOCS[el.dataset.index].content.toLowerCase();
+    el.style.display = (label.includes(q) || docContent.includes(q)) ? '' : 'none';
+  });
+}
+
+function toggleSidebar() {
+  document.querySelector('.sidebar').classList.toggle('open');
+  document.querySelector('.overlay').classList.toggle('open');
+}
+
+// Keyboard nav
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown' && e.altKey) {
+    e.preventDefault();
+    selectDoc(Math.min(currentDoc + 1, DOCS.length - 1));
+  } else if (e.key === 'ArrowUp' && e.altKey) {
+    e.preventDefault();
+    selectDoc(Math.max(currentDoc - 1, 0));
+  }
+});
+
+// Init
+marked.setOptions({ gfm: true, breaks: false });
+buildNav();
+selectDoc(0);
+</script>
+</body>
+</html>
