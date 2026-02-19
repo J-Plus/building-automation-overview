@@ -734,23 +734,6 @@ body {
     </div>
   </div>
 
-  <!-- Feedback Loop -->
-  <div class="feedback-loop">
-    <h3>The Feedback Loop</h3>
-    <p>The labor shortage is the industry's biggest constraint <em>and</em> its biggest growth catalyst.</p>
-    <div class="loop-visual">
-      <div class="loop-step">More automation demand</div>
-      <div class="loop-arrow">→</div>
-      <div class="loop-step">Need skilled techs</div>
-      <div class="loop-arrow">→</div>
-      <div class="loop-step">Not enough techs</div>
-      <div class="loop-arrow">→</div>
-      <div class="loop-step">More AI/remote monitoring</div>
-      <div class="loop-arrow">→</div>
-      <div class="loop-step" style="border-color:var(--accent);">↻ Repeat</div>
-    </div>
-  </div>
-
   <div class="data-toggle" onclick="toggleRawData('raw-labor')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
     View Source Data
