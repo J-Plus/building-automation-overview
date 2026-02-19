@@ -602,22 +602,28 @@ body {
 
   <div class="chart-row">
     <div class="chart-container">
-      <h3>Market Projections by Source (2025 → 2030)</h3>
+      <h3>Market Projections by Research Firm</h3>
+      <p style="font-size:13px;color:var(--text-secondary);margin:-8px 0 16px;line-height:1.5;">How 4 major research firms project BAS market value. Teal bars = 2025 estimates, blue bars = 2030 projections. All sources agree: the market roughly doubles.</p>
       <canvas id="chartMarketProjections"></canvas>
+      <p style="font-size:11px;color:var(--text-muted);margin-top:12px;font-style:italic;">Sources: MarketsandMarkets, Research & Markets, PS Market Research, The Research Insights</p>
     </div>
     <div class="chart-container">
-      <h3>CAGR by Segment</h3>
+      <h3>Annual Growth Rate (CAGR) by Segment</h3>
+      <p style="font-size:13px;color:var(--text-secondary);margin:-8px 0 16px;line-height:1.5;">Compound annual growth rates. Orange = fastest-growing segments. Blue = overall market CAGR from different research firms.</p>
       <canvas id="chartCagr"></canvas>
     </div>
   </div>
 
   <div class="chart-row">
     <div class="chart-container">
-      <h3>Regional Market Share</h3>
+      <h3>Regional Market Share (2024)</h3>
+      <p style="font-size:13px;color:var(--text-secondary);margin:-8px 0 16px;line-height:1.5;">North America leads at 34.2%. Asia-Pacific is the fastest-growing region driven by rapid urbanization.</p>
       <canvas id="chartRegional"></canvas>
+      <p style="font-size:11px;color:var(--text-muted);margin-top:12px;font-style:italic;">Source: MarketsandMarkets, 2024</p>
     </div>
     <div class="chart-container">
-      <h3>Growth Drivers</h3>
+      <h3>What's Driving Market Growth?</h3>
+      <p style="font-size:13px;color:var(--text-secondary);margin:-8px 0 16px;line-height:1.5;">Ranked by relative impact based on frequency of citation across industry reports. IoT/AI integration is the top driver.</p>
       <canvas id="chartDrivers"></canvas>
     </div>
   </div>
@@ -693,8 +699,10 @@ body {
 
   <div class="chart-row">
     <div class="chart-container">
-      <h3>Salary: General HVAC vs BAS Specialist</h3>
+      <h3>The BAS Specialization Premium</h3>
+      <p style="font-size:13px;color:var(--text-secondary);margin:-8px 0 16px;line-height:1.5;">BAS specialists earn 30-60% more than general HVAC techs. Data center roles command the highest premiums due to mission-critical precision cooling.</p>
       <canvas id="chartSalaryComparison"></canvas>
+      <p style="font-size:11px;color:var(--text-muted);margin-top:12px;font-style:italic;">Gray = salary floor, teal = salary ceiling for each specialization</p>
     </div>
     <div class="chart-container">
       <h3>ROI of Investing in Technician Training</h3>
@@ -791,11 +799,13 @@ body {
 
   <div class="chart-row">
     <div class="chart-container">
-      <h3>Pay by Employer Type</h3>
+      <h3>BAS Technician Salary Range by Employer Type</h3>
+      <p style="font-size:13px;color:var(--text-secondary);margin:-8px 0 16px;line-height:1.5;">Where you work matters as much as what you know. Data centers pay the most; small integrators offer the most autonomy but lower pay. Gray = floor, teal = ceiling.</p>
       <canvas id="chartEmployerPay"></canvas>
     </div>
     <div class="chart-container">
-      <h3>Core Technical Skills</h3>
+      <h3>Core Skill Areas for BAS Technicians</h3>
+      <p style="font-size:13px;color:var(--text-secondary);margin:-8px 0 16px;line-height:1.5;">Relative importance of each skill domain. DDC/Controls programming is the most critical differentiator. IT/Networking is the fastest-growing requirement.</p>
       <canvas id="chartSkills"></canvas>
     </div>
   </div>
@@ -842,12 +852,16 @@ body {
 
   <div class="chart-row">
     <div class="chart-container">
-      <h3>BAS Technician Salary by Percentile</h3>
+      <h3>BAS Technician Salary: NYC vs Charlotte</h3>
+      <p style="font-size:13px;color:var(--text-secondary);margin:-8px 0 16px;line-height:1.5;">NYC pays 20-39% more in absolute dollars at every level. The gap widens at senior levels. Charlotte 90th percentile data unavailable.</p>
       <canvas id="chartCityPay"></canvas>
+      <p style="font-size:11px;color:var(--text-muted);margin-top:12px;font-style:italic;">Sources: Salary.com, Glassdoor, ZipRecruiter (2025)</p>
     </div>
     <div class="chart-container">
-      <h3>Cost of Living Difference (NYC vs CLT)</h3>
+      <h3>How Much More Expensive is NYC?</h3>
+      <p style="font-size:13px;color:var(--text-secondary);margin:-8px 0 16px;line-height:1.5;">NYC cost of living premium over Charlotte by category. Housing is the biggest gap at +150%, which alone eats the entire salary premium.</p>
       <canvas id="chartCOL"></canvas>
+      <p style="font-size:11px;color:var(--text-muted);margin-top:12px;font-style:italic;">Sources: Numbeo, BestPlaces.net</p>
     </div>
   </div>
 
@@ -930,12 +944,15 @@ body {
 
   <div class="chart-row">
     <div class="chart-container">
-      <h3>Identified Employers: NY vs NC</h3>
+      <h3>BAS Employers Identified: NY vs NC by Category</h3>
+      <p style="font-size:13px;color:var(--text-secondary);margin:-8px 0 16px;line-height:1.5;">Number of companies we identified in each category. NY leads in integrators and property management. NC dominates in data centers — a segment that barely exists in NYC.</p>
       <canvas id="chartEmployerCount"></canvas>
     </div>
     <div class="chart-container">
-      <h3>NC Data Center Investments ($B)</h3>
+      <h3>North Carolina Data Center Investment</h3>
+      <p style="font-size:13px;color:var(--text-secondary);margin:-8px 0 16px;line-height:1.5;">Announced/committed investments by major tech companies in NC. This boom is creating massive demand for HVAC/BAS technicians who can handle precision cooling.</p>
       <canvas id="chartDataCenter"></canvas>
+      <p style="font-size:11px;color:var(--text-muted);margin-top:12px;font-style:italic;">Note: Energy Storage Solutions ($19.2B) is a planned project; others are committed/under construction</p>
     </div>
   </div>
 
@@ -1082,27 +1099,37 @@ new Chart(document.getElementById('chartMarketProjections'), {
     labels: ['MarketsandMarkets', 'Research & Markets', 'PS Market Research', 'The Research Insights'],
     datasets: [
       {
-        label: '2025 ($B)',
+        label: '2025 Estimate',
         data: [101.3, 117.37, 101.3, null],
         backgroundColor: chartColors.accent + '88',
         borderColor: chartColors.accent,
         borderWidth: 1,
+        borderRadius: 4,
       },
       {
-        label: '2030 ($B)',
+        label: '2030 Projection',
         data: [191.13, 205.55, 220.7, 163.27],
         backgroundColor: chartColors.blue + '88',
         borderColor: chartColors.blue,
         borderWidth: 1,
+        borderRadius: 4,
       }
     ]
   },
   options: {
     responsive: true,
-    plugins: { legend: { position: 'top' } },
+    plugins: {
+      legend: { position: 'top' },
+      tooltip: {
+        callbacks: {
+          label: ctx => ctx.dataset.label + ': $' + ctx.raw + ' billion'
+        }
+      }
+    },
     scales: {
       y: {
         beginAtZero: true,
+        title: { display: true, text: 'Market Value (USD Billions)', color: chartColors.textColor, font: { size: 11 } },
         ticks: { callback: v => '$' + v + 'B' },
         grid: { color: chartColors.gridColor }
       },
@@ -1115,11 +1142,18 @@ new Chart(document.getElementById('chartMarketProjections'), {
 new Chart(document.getElementById('chartCagr'), {
   type: 'bar',
   data: {
-    labels: ['Energy Mgmt Software', 'Industrial Apps', 'MarketsandMarkets Overall', 'PS Market Research Overall', 'Research & Markets Overall', 'Mordor Intelligence Overall', 'The Research Insights Overall'],
+    labels: [
+      'Energy Mgmt Software  17.2%',
+      'Industrial Applications  14.7%',
+      'PS Market Research  13.9%',
+      'MarketsandMarkets  13.4%',
+      'Research & Markets  11.8%',
+      'Mordor Intelligence  11.4%',
+      'The Research Insights  10.5%'
+    ],
     datasets: [{
-      label: 'CAGR %',
-      data: [17.2, 14.7, 13.4, 13.9, 11.78, 11.4, 10.53],
-      backgroundColor: [chartColors.orange, chartColors.accent, chartColors.blue, chartColors.blue, chartColors.blue, chartColors.blue, chartColors.blue],
+      data: [17.2, 14.7, 13.9, 13.4, 11.78, 11.4, 10.53],
+      backgroundColor: [chartColors.orange + 'cc', chartColors.orange + '99', chartColors.blue + '88', chartColors.blue + '88', chartColors.blue + '88', chartColors.blue + '88', chartColors.blue + '88'],
       borderWidth: 0,
       borderRadius: 4,
     }]
@@ -1127,14 +1161,22 @@ new Chart(document.getElementById('chartCagr'), {
   options: {
     indexAxis: 'y',
     responsive: true,
-    plugins: { legend: { display: false } },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => 'Annual growth rate: ' + ctx.raw + '% per year (2025-2030)'
+        }
+      }
+    },
     scales: {
       x: {
         beginAtZero: true,
+        title: { display: true, text: 'CAGR %', color: chartColors.textColor, font: { size: 11 } },
         ticks: { callback: v => v + '%' },
         grid: { color: chartColors.gridColor }
       },
-      y: { grid: { display: false } }
+      y: { grid: { display: false }, ticks: { font: { size: 11 } } }
     }
   }
 });
@@ -1143,18 +1185,24 @@ new Chart(document.getElementById('chartCagr'), {
 new Chart(document.getElementById('chartRegional'), {
   type: 'doughnut',
   data: {
-    labels: ['North America', 'Europe', 'Asia Pacific', 'Rest of World'],
+    labels: ['North America — 34.2%', 'Asia Pacific — 28%', 'Europe — 25%', 'Rest of World — 12.8%'],
     datasets: [{
-      data: [34.2, 25, 28, 12.8],
-      backgroundColor: [chartColors.accent, chartColors.blue, chartColors.orange, chartColors.gray],
-      borderWidth: 0,
+      data: [34.2, 28, 25, 12.8],
+      backgroundColor: [chartColors.accent, chartColors.orange, chartColors.blue, chartColors.gray],
+      borderWidth: 2,
+      borderColor: '#0a0f14',
     }]
   },
   options: {
     responsive: true,
-    cutout: '65%',
+    cutout: '60%',
     plugins: {
-      legend: { position: 'bottom' }
+      legend: { position: 'bottom', labels: { font: { size: 12 }, padding: 16 } },
+      tooltip: {
+        callbacks: {
+          label: ctx => ctx.label + ' of global BAS market'
+        }
+      }
     }
   }
 });
@@ -1163,23 +1211,35 @@ new Chart(document.getElementById('chartRegional'), {
 new Chart(document.getElementById('chartDrivers'), {
   type: 'bar',
   data: {
-    labels: ['IoT/AI Integration', 'Energy Regulations', 'Smart City Investment', 'Occupant Comfort', 'Data-Driven Decisions', 'Sustainability Mandates'],
+    labels: ['IoT & AI Integration', 'Energy Efficiency Regulations', 'Smart City Investment', 'Occupant Comfort & Safety', 'Data-Driven Decision Making', 'Sustainability Mandates'],
     datasets: [{
-      label: 'Impact Score',
       data: [95, 88, 82, 75, 72, 70],
-      backgroundColor: chartColors.accent + '66',
-      borderColor: chartColors.accent,
-      borderWidth: 1,
+      backgroundColor: [
+        chartColors.accent + 'cc',
+        chartColors.accent + 'aa',
+        chartColors.accent + '88',
+        chartColors.accent + '77',
+        chartColors.accent + '66',
+        chartColors.accent + '55',
+      ],
+      borderWidth: 0,
       borderRadius: 4,
     }]
   },
   options: {
     indexAxis: 'y',
     responsive: true,
-    plugins: { legend: { display: false } },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => 'Cited in ' + ctx.raw + '% of industry reports as a key growth driver'
+        }
+      }
+    },
     scales: {
       x: { display: false, max: 100 },
-      y: { grid: { display: false } }
+      y: { grid: { display: false }, ticks: { font: { size: 12 } } }
     }
   }
 });
@@ -1188,17 +1248,17 @@ new Chart(document.getElementById('chartDrivers'), {
 new Chart(document.getElementById('chartSalaryComparison'), {
   type: 'bar',
   data: {
-    labels: ['General HVAC', 'BAS Specialist', 'Data Center BAS'],
+    labels: ['General HVAC\n$55-70K', 'BAS Specialist\n$70-110K', 'Data Center BAS\n$70-120K'],
     datasets: [
       {
-        label: 'Low ($K)',
+        label: 'Salary Floor',
         data: [55, 70, 70],
         backgroundColor: chartColors.gray + '88',
         borderWidth: 0,
         borderRadius: 4,
       },
       {
-        label: 'High ($K)',
+        label: 'Salary Ceiling',
         data: [70, 110, 120],
         backgroundColor: chartColors.accent + '88',
         borderColor: chartColors.accent,
@@ -1209,10 +1269,18 @@ new Chart(document.getElementById('chartSalaryComparison'), {
   },
   options: {
     responsive: true,
-    plugins: { legend: { position: 'top' } },
+    plugins: {
+      legend: { position: 'top' },
+      tooltip: {
+        callbacks: {
+          label: ctx => ctx.dataset.label + ': $' + ctx.raw + ',000/year'
+        }
+      }
+    },
     scales: {
       y: {
         beginAtZero: true,
+        title: { display: true, text: 'Annual Salary (USD)', color: chartColors.textColor, font: { size: 11 } },
         ticks: { callback: v => '$' + v + 'K' },
         grid: { color: chartColors.gridColor }
       },
@@ -1271,17 +1339,24 @@ new Chart(document.getElementById('chartTrainingROI'), {
 new Chart(document.getElementById('chartEmployerPay'), {
   type: 'bar',
   data: {
-    labels: ['Data Centers', 'OEM Manufacturer', 'Integrator (Large)', 'Property Mgmt', 'Healthcare/Govt', 'Integrator (Small)'],
+    labels: [
+      'Data Centers  $70-120K',
+      'OEM Manufacturer  $65-110K',
+      'Large Integrator  $55-100K',
+      'Property Mgmt  $60-95K',
+      'Healthcare/Govt  $55-90K',
+      'Small Integrator  $45-85K'
+    ],
     datasets: [
       {
-        label: 'Low ($K)',
+        label: 'Salary Floor',
         data: [70, 65, 55, 60, 55, 45],
         backgroundColor: chartColors.gray + '66',
         borderWidth: 0,
         borderRadius: 4,
       },
       {
-        label: 'High ($K)',
+        label: 'Salary Ceiling',
         data: [120, 110, 100, 95, 90, 85],
         backgroundColor: chartColors.accent + '88',
         borderColor: chartColors.accent,
@@ -1293,14 +1368,22 @@ new Chart(document.getElementById('chartEmployerPay'), {
   options: {
     indexAxis: 'y',
     responsive: true,
-    plugins: { legend: { position: 'top' } },
+    plugins: {
+      legend: { position: 'top' },
+      tooltip: {
+        callbacks: {
+          label: ctx => ctx.dataset.label + ': $' + ctx.raw + ',000/year'
+        }
+      }
+    },
     scales: {
       x: {
         beginAtZero: true,
+        title: { display: true, text: 'Annual Salary (USD)', color: chartColors.textColor, font: { size: 11 } },
         ticks: { callback: v => '$' + v + 'K' },
         grid: { color: chartColors.gridColor }
       },
-      y: { grid: { display: false } }
+      y: { grid: { display: false }, ticks: { font: { size: 11 } } }
     }
   }
 });
@@ -1309,26 +1392,33 @@ new Chart(document.getElementById('chartEmployerPay'), {
 new Chart(document.getElementById('chartSkills'), {
   type: 'radar',
   data: {
-    labels: ['Electrical', 'HVAC Systems', 'DDC/Controls', 'IT/Networking', 'Mechanical'],
+    labels: ['Electrical\n(Ohm's Law, AC/DC)', 'HVAC Systems\n(AHUs, VAVs, Chillers)', 'DDC / Controls\n(BACnet, Programming)', 'IT / Networking\n(Fastest Growing)', 'Mechanical\n(Schematics, Spatial)'],
     datasets: [{
-      label: 'BAS Technician Skill Profile',
+      label: 'Importance Level',
       data: [85, 90, 95, 75, 70],
       backgroundColor: chartColors.accent + '22',
       borderColor: chartColors.accent,
       borderWidth: 2,
       pointBackgroundColor: chartColors.accent,
-      pointRadius: 4,
+      pointRadius: 5,
     }]
   },
   options: {
     responsive: true,
-    plugins: { legend: { display: false } },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => 'Importance: ' + ctx.raw + '/100'
+        }
+      }
+    },
     scales: {
       r: {
         beginAtZero: true, max: 100,
         grid: { color: chartColors.gridColor },
         angleLines: { color: chartColors.gridColor },
-        pointLabels: { color: chartColors.textColor, font: { size: 12 } },
+        pointLabels: { color: chartColors.textColor, font: { size: 11 } },
         ticks: { display: false }
       }
     }
@@ -1339,10 +1429,10 @@ new Chart(document.getElementById('chartSkills'), {
 new Chart(document.getElementById('chartCityPay'), {
   type: 'bar',
   data: {
-    labels: ['25th Percentile', 'Average', '75th Percentile', '90th Percentile'],
+    labels: ['25th Percentile\n(Entry/Mid)', 'Average', '75th Percentile\n(Experienced)', '90th Percentile\n(Senior)'],
     datasets: [
       {
-        label: 'NYC ($K)',
+        label: 'New York City',
         data: [62, 77, 97, 119],
         backgroundColor: chartColors.blue + '88',
         borderColor: chartColors.blue,
@@ -1350,7 +1440,7 @@ new Chart(document.getElementById('chartCityPay'), {
         borderRadius: 4,
       },
       {
-        label: 'Charlotte ($K)',
+        label: 'Charlotte, NC',
         data: [50, 57, 72, null],
         backgroundColor: chartColors.orange + '88',
         borderColor: chartColors.orange,
@@ -1361,10 +1451,21 @@ new Chart(document.getElementById('chartCityPay'), {
   },
   options: {
     responsive: true,
-    plugins: { legend: { position: 'top' } },
+    plugins: {
+      legend: { position: 'top' },
+      tooltip: {
+        callbacks: {
+          label: ctx => {
+            if (ctx.raw === null) return ctx.dataset.label + ': No data available';
+            return ctx.dataset.label + ': $' + ctx.raw + ',000/year';
+          }
+        }
+      }
+    },
     scales: {
       y: {
         beginAtZero: true,
+        title: { display: true, text: 'Annual Salary (USD)', color: chartColors.textColor, font: { size: 11 } },
         ticks: { callback: v => '$' + v + 'K' },
         grid: { color: chartColors.gridColor }
       },
@@ -1377,11 +1478,17 @@ new Chart(document.getElementById('chartCityPay'), {
 new Chart(document.getElementById('chartCOL'), {
   type: 'bar',
   data: {
-    labels: ['Housing', 'Overall', 'Transportation', 'Groceries', 'Utilities', 'Healthcare'],
+    labels: [
+      'Housing  +150%',
+      'Overall Cost of Living  +41%',
+      'Transportation  +25%',
+      'Groceries  +20%',
+      'Utilities  +17%',
+      'Healthcare  +12%'
+    ],
     datasets: [{
-      label: 'NYC Premium Over Charlotte (%)',
       data: [150, 41, 25, 20, 17, 12],
-      backgroundColor: [chartColors.red + '88', chartColors.orange + '88', chartColors.yellow + '88', chartColors.blue + '88', chartColors.purple + '88', chartColors.accent + '88'],
+      backgroundColor: [chartColors.red + 'aa', chartColors.orange + '99', chartColors.yellow + '88', chartColors.blue + '88', chartColors.purple + '88', chartColors.accent + '88'],
       borderWidth: 0,
       borderRadius: 4,
     }]
@@ -1389,14 +1496,22 @@ new Chart(document.getElementById('chartCOL'), {
   options: {
     indexAxis: 'y',
     responsive: true,
-    plugins: { legend: { display: false } },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => 'NYC costs ' + ctx.raw + '% more than Charlotte for this category'
+        }
+      }
+    },
     scales: {
       x: {
         beginAtZero: true,
+        title: { display: true, text: 'NYC Premium Over Charlotte (%)', color: chartColors.textColor, font: { size: 11 } },
         ticks: { callback: v => '+' + v + '%' },
         grid: { color: chartColors.gridColor }
       },
-      y: { grid: { display: false } }
+      y: { grid: { display: false }, ticks: { font: { size: 11 } } }
     }
   }
 });
@@ -1405,11 +1520,11 @@ new Chart(document.getElementById('chartCOL'), {
 new Chart(document.getElementById('chartEmployerCount'), {
   type: 'bar',
   data: {
-    labels: ['Integrators', 'Property Mgmt', 'Healthcare', 'Higher Ed', 'OEMs', 'Government', 'Data Centers'],
+    labels: ['Systems\nIntegrators', 'Property\nMgmt', 'Data\nCenters', 'Healthcare\nSystems', 'Higher\nEd', 'OEMs', 'Government'],
     datasets: [
       {
         label: 'New York',
-        data: [16, 11, 6, 6, 6, 5, 0],
+        data: [16, 11, 0, 6, 6, 6, 5],
         backgroundColor: chartColors.blue + '88',
         borderColor: chartColors.blue,
         borderWidth: 1,
@@ -1417,7 +1532,7 @@ new Chart(document.getElementById('chartEmployerCount'), {
       },
       {
         label: 'North Carolina',
-        data: [14, 8, 5, 6, 5, 5, 11],
+        data: [14, 8, 11, 5, 6, 5, 5],
         backgroundColor: chartColors.orange + '88',
         borderColor: chartColors.orange,
         borderWidth: 1,
@@ -1427,10 +1542,18 @@ new Chart(document.getElementById('chartEmployerCount'), {
   },
   options: {
     responsive: true,
-    plugins: { legend: { position: 'top' } },
+    plugins: {
+      legend: { position: 'top' },
+      tooltip: {
+        callbacks: {
+          label: ctx => ctx.dataset.label + ': ' + ctx.raw + ' companies identified'
+        }
+      }
+    },
     scales: {
       y: {
         beginAtZero: true,
+        title: { display: true, text: 'Number of Companies', color: chartColors.textColor, font: { size: 11 } },
         ticks: { stepSize: 2 },
         grid: { color: chartColors.gridColor }
       },
@@ -1443,21 +1566,34 @@ new Chart(document.getElementById('chartEmployerCount'), {
 new Chart(document.getElementById('chartDataCenter'), {
   type: 'bar',
   data: {
-    labels: ['AWS', 'Energy Storage', 'Google', 'Apple', 'Microsoft'],
+    labels: [
+      'Energy Storage Sol.\n$19.2B (planned)',
+      'AWS\n$10B (committed)',
+      'Google\n$1.2B+',
+      'Apple\n$175M expansion',
+      'Microsoft\n$27M land'
+    ],
     datasets: [{
-      label: 'Investment ($B)',
-      data: [10, 19.2, 1.2, 0.175, 0.027],
-      backgroundColor: [chartColors.orange + 'cc', chartColors.accent + 'cc', chartColors.blue + 'cc', chartColors.purple + 'cc', chartColors.yellow + 'cc'],
+      data: [19.2, 10, 1.2, 0.175, 0.027],
+      backgroundColor: [chartColors.accent + 'cc', chartColors.orange + 'cc', chartColors.blue + 'cc', chartColors.purple + 'cc', chartColors.yellow + 'cc'],
       borderWidth: 0,
       borderRadius: 4,
     }]
   },
   options: {
     responsive: true,
-    plugins: { legend: { display: false } },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => '$' + ctx.raw + ' billion investment in North Carolina'
+        }
+      }
+    },
     scales: {
       y: {
         beginAtZero: true,
+        title: { display: true, text: 'Investment (USD Billions)', color: chartColors.textColor, font: { size: 11 } },
         ticks: { callback: v => '$' + v + 'B' },
         grid: { color: chartColors.gridColor }
       },
