@@ -697,8 +697,10 @@ body {
       <canvas id="chartSalaryComparison"></canvas>
     </div>
     <div class="chart-container">
-      <h3>Training ROI</h3>
+      <h3>ROI of Investing in Technician Training</h3>
+      <p style="font-size:13px;color:var(--text-secondary);margin:-8px 0 16px;line-height:1.5;">Companies that prioritize BAS technician training programs see measurable gains across the business. These are reported improvements vs. companies with no structured training.</p>
       <canvas id="chartTrainingROI"></canvas>
+      <p style="font-size:11px;color:var(--text-muted);margin-top:12px;font-style:italic;">Source: Industry surveys of HVAC/BAS service companies, 2024-2025</p>
     </div>
   </div>
 
@@ -1223,25 +1225,44 @@ new Chart(document.getElementById('chartSalaryComparison'), {
 new Chart(document.getElementById('chartTrainingROI'), {
   type: 'bar',
   data: {
-    labels: ['Profit Margin', 'Retention', 'Service Speed', 'Customer Satisfaction'],
+    labels: [
+      '+24% Profit Margins',
+      '+30-50% Employee Retention',
+      '+20% Faster Service Calls',
+      '+15% Customer Satisfaction'
+    ],
     datasets: [{
-      label: 'Improvement %',
+      label: 'Improvement vs. No Training',
       data: [24, 40, 20, 15],
-      backgroundColor: [chartColors.accent, chartColors.blue, chartColors.orange, chartColors.purple],
+      backgroundColor: [chartColors.accent + 'cc', chartColors.blue + 'cc', chartColors.orange + 'cc', chartColors.purple + 'cc'],
       borderWidth: 0,
       borderRadius: 4,
     }]
   },
   options: {
+    indexAxis: 'y',
     responsive: true,
-    plugins: { legend: { display: false } },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: function(ctx) {
+            return '+' + ctx.raw + '% improvement over companies without structured training';
+          }
+        }
+      }
+    },
     scales: {
-      y: {
+      x: {
         beginAtZero: true,
+        max: 50,
         ticks: { callback: v => '+' + v + '%' },
         grid: { color: chartColors.gridColor }
       },
-      x: { grid: { display: false } }
+      y: {
+        grid: { display: false },
+        ticks: { font: { size: 12 } }
+      }
     }
   }
 });
