@@ -148,14 +148,14 @@ body {
   overflow: hidden; display: flex; align-items: center; justify-content: center;
 }
 .hero::before {
-  content: ''; position: absolute; inset: 0;
+  content: ''; position: absolute; inset: 0; z-index: 0;
   background: linear-gradient(135deg, #dbeafe 0%, #ede9fe 50%, #fce7f3 100%);
   opacity: 0.7;
 }
 .hero::after {
-  content: ''; position: absolute; inset: 0;
+  content: ''; position: absolute; inset: 0; z-index: 1;
   background: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1400&q=80') center/cover;
-  opacity: 0.05;
+  opacity: 0.05; pointer-events: none;
 }
 .hero-content { position: relative; z-index: 2; text-align: center; padding: 0 40px; }
 .hero-content h1 {
@@ -1413,7 +1413,7 @@ new Chart(document.getElementById('chartEmployerPay'), {
 new Chart(document.getElementById('chartSkills'), {
   type: 'radar',
   data: {
-    labels: ['Electrical\\n(Ohm\'s Law, AC/DC)', 'HVAC Systems\\n(AHUs, VAVs, Chillers)', 'DDC / Controls\\n(BACnet, Programming)', 'IT / Networking\\n(Fastest Growing)', 'Mechanical\\n(Schematics, Spatial)'],
+    labels: ['Electrical\\n(AC/DC, Circuits)', 'HVAC Systems\\n(AHUs, VAVs, Chillers)', 'DDC / Controls\\n(BACnet, Programming)', 'IT / Networking\\n(Fastest Growing)', 'Mechanical\\n(Schematics, Spatial)'],
     datasets: [{
       label: 'Importance Level',
       data: [85, 90, 95, 75, 70],
